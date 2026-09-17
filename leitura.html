@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leitura Guiada · Expedição Dois Biomas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#08131b; --fundo2:#0e1e29; --painel:#122938; --painel2:#16344a;
+  --linha:#1e4257; --texto:#e6f2f3; --fraco:#9db6c2;
+  --verde:#33d9a0; --verde2:#8ff3cd; --verdeEsc:#0d3b2e;
+  --ambar:#f2a541; --ambar2:#ffd08a; --ambarEsc:#41280c;
+  --ouro:#ffd479; --vermelho:#ff6b6b; --vermelhoEsc:#3a1414;
+  --postit:#ffe082;
+  --tf:'Inter',"Segoe UI",system-ui,-apple-system,sans-serif;
+  --td:'Space Grotesk',"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(900px 420px at 12% -6%, #123b35 0%, transparent 60%),
+    radial-gradient(760px 380px at 92% 4%, #3b2a10 0%, transparent 62%),
+    var(--fundo);
+  color:var(--texto); font-family:var(--tf); font-size:17px; line-height:1.65;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 80px}
+a{color:var(--verde2)}
+h1,h2,h3,h4{font-family:var(--td);line-height:1.2;margin:0 0 10px}
+h1{font-size:30px;letter-spacing:.4px}
+h2{font-size:23px}
+h3{font-size:19px}
+.pequeno{font-size:14px;color:var(--fraco)}
+.limpa{margin:0;padding-left:20px}
+
+/* ---------- topo ---------- */
+.topo{
+  background:linear-gradient(135deg,#0c2b25 0%,#11293a 48%,#3a2a12 100%);
+  border-bottom:2px solid var(--linha); padding:26px 0 20px; margin-bottom:22px;
+}
+.topo .wrap{padding-bottom:0}
+.crachá,.cracha{display:inline-block;font-family:var(--td);font-size:12px;letter-spacing:2px;
+  text-transform:uppercase;color:#06231c;background:var(--verde);padding:4px 12px;border-radius:999px;font-weight:700}
+.cracha.amb{background:var(--ambar);color:#2a1806}
+.subtopo{color:var(--fraco);margin:6px 0 0;font-size:15px}
+
+/* ---------- abas ---------- */
+.abas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.abas a{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--td);
+  font-size:14px;color:var(--texto);background:var(--painel);border:1px solid var(--linha);
+  padding:8px 13px;border-radius:999px;
+}
+.abas a.ativa{background:var(--verde);color:#062018;border-color:var(--verde);font-weight:700}
+.abas a:hover{border-color:var(--verde)}
+
+/* ---------- caixas ---------- */
+.card{background:var(--painel);border:1px solid var(--linha);border-radius:16px;padding:20px;margin:16px 0}
+.card.verde{border-left:5px solid var(--verde)}
+.card.amb{border-left:5px solid var(--ambar)}
+.postit{
+  background:var(--postit);color:#3c2d00;border-radius:4px;padding:14px 16px;margin:14px 0;
+  box-shadow:4px 4px 0 rgba(0,0,0,.35); transform:rotate(-.5deg); font-size:16px;
+}
+.postit b{color:#7a5a00}
+.pegadinha{background:var(--vermelhoEsc);border:1px solid #6b2626;border-left:5px solid var(--vermelho);
+  border-radius:12px;padding:14px 16px;margin:14px 0}
+.pegadinha b{color:#ff9b9b}
+.narrador{border-left:3px dashed var(--ambar);padding:6px 0 6px 14px;color:var(--ambar2);
+  font-style:italic;margin:14px 0;font-size:15.5px}
+.aviso-vermelho{background:var(--vermelhoEsc);border:1px solid #7a2a2a;color:#ffc9c9;
+  padding:10px 12px;border-radius:10px;margin:8px 0;font-size:15px}
+.aviso-copia{background:#3d3208;border:1px solid #8a7420;color:#ffe9a8;
+  padding:10px 12px;border-radius:10px;margin:8px 0;font-size:15px}
+
+/* ---------- botões ---------- */
+.btn{font-family:var(--td);font-size:15px;border:0;border-radius:999px;padding:10px 18px;cursor:pointer}
+.btn-1{background:var(--verde);color:#062018;font-weight:700}
+.btn-2{background:var(--painel2);color:var(--texto);border:1px solid var(--linha)}
+.btn-3{background:var(--ambar);color:#2a1806;font-weight:700}
+.btn-v{background:#c0392b;color:#fff;font-weight:700}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-grande{font-size:18px;padding:13px 26px}
+
+/* ---------- painel de salvamento ---------- */
+.salvar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+  background:var(--fundo2);border:1px solid var(--linha);border-radius:14px;padding:12px 14px;margin:16px 0}
+.salvar .bts{display:flex;gap:8px;flex-wrap:wrap}
+.salvar .bts .btn{font-size:13.5px;padding:7px 13px}
+textarea{width:100%;background:#0a1c26;color:var(--texto);border:1px solid var(--linha);
+  border-radius:10px;padding:10px;font-family:var(--tf);font-size:16px;resize:vertical}
+input[type=text]{background:#0a1c26;color:var(--texto);border:1px solid var(--linha);
+  border-radius:10px;padding:9px 12px;font-family:var(--td);font-size:16px}
+
+/* ---------- progresso ---------- */
+.prog{background:#0a1c26;border:1px solid var(--linha);border-radius:999px;height:12px;overflow:hidden;margin:8px 0}
+.prog > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--ambar));transition:width .4s}
+
+/* ---------- blocos da leitura ---------- */
+.bloco{background:var(--painel);border:1px solid var(--linha);border-radius:16px;margin:18px 0;overflow:hidden}
+.bloco.trancado{opacity:.5}
+.bloco .cab{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+  padding:14px 18px;background:var(--painel2);border-bottom:1px solid var(--linha)}
+.bloco .cab h3{margin:0}
+.bloco .corpo{padding:18px}
+.num{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--verde);color:#062018;
+  align-items:center;justify-content:center;font-family:var(--td);font-weight:700;margin-right:8px}
+.bloco.nord .num{background:var(--ambar);color:#2a1806}
+.status{font-size:13px;color:var(--fraco);font-family:var(--td)}
+.selo-ok{color:#062018;background:var(--verde);padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+.selo-rev{color:#2a1806;background:var(--ambar);padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+.perg{background:var(--fundo2);border:1px solid var(--linha);border-radius:12px;padding:14px;margin:12px 0}
+.perg.vermelha{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho) inset}
+.enun{font-weight:600;margin-bottom:8px}
+.modelo{background:var(--verdeEsc);border:1px solid #1d6b52;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:15.5px}
+.checklist{background:#0a1c26;border:1px solid var(--linha);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:15px}
+.checklist .item{display:flex;gap:8px;align-items:center;justify-content:space-between;
+  padding:6px 0;border-bottom:1px dashed #1b3a4c}
+.checklist .item:last-child{border-bottom:0}
+.checklist .item span{flex:1}
+.mini{font-family:var(--td);font-size:13px;border:1px solid var(--linha);background:var(--painel2);
+  color:var(--texto);border-radius:999px;padding:4px 12px;cursor:pointer}
+.mini.on-sim{background:var(--verde);color:#062018;border-color:var(--verde);font-weight:700}
+.mini.on-nao{background:var(--ambar);color:#2a1806;border-color:var(--ambar);font-weight:700}
+
+/* ---------- tabelas ---------- */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+th,td{border:1px solid var(--linha);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--painel2);font-family:var(--td);font-size:14.5px}
+
+/* ---------- quiz / simulado ---------- */
+.q{background:var(--painel);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:14px 0}
+.q .tag{font-family:var(--td);font-size:12px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--painel2);border:1px solid var(--linha);color:var(--fraco);padding:3px 9px;border-radius:999px}
+.q .tag.som{background:#3a2a12;color:var(--ambar2);border-color:#6b5120}
+.q .tag.rom{background:#12323f;color:#8fd8f3;border-color:#1f5b70}
+.q .tag.dis{background:#2a1230;color:#e4a8f3;border-color:#5b2170}
+.q .cab{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.q .nq{font-family:var(--td);font-weight:700;color:var(--ouro)}
+.alts{list-style:none;margin:10px 0 0;padding:0}
+.alts li{margin:7px 0}
+.alts label{display:flex;gap:10px;align-items:flex-start;background:var(--fundo2);border:1px solid var(--linha);
+  border-radius:10px;padding:10px 12px;cursor:pointer}
+.alts label:hover{border-color:var(--verde)}
+.alts input{margin-top:5px}
+.alts label.certa{background:#0f3d2c;border-color:var(--verde)}
+.alts label.errada{background:#20303a;border-color:#3b4e59;opacity:.92}
+.alts label.marcada{outline:2px solid var(--ouro)}
+.coment{font-size:14.5px;color:var(--fraco);margin-top:6px;padding-left:4px}
+.travado .alts label{cursor:default}
+.placar{position:sticky;top:0;z-index:5;background:#08131bdd;backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--linha);padding:10px 0;margin-bottom:8px}
+.placar .wrap{padding-bottom:0;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.codigo{font-family:var(--td);font-size:26px;letter-spacing:3px;color:var(--ouro);font-weight:700}
+
+/* ---------- flip cards ---------- */
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+.flip{perspective:1100px;height:186px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;
+  border:1px solid var(--linha);padding:14px;display:flex;flex-direction:column;justify-content:center;overflow:auto}
+.flip .f{background:var(--painel2);font-family:var(--td);font-size:17px;text-align:center}
+.flip .b{background:var(--verdeEsc);transform:rotateY(180deg);font-size:15px}
+.flip.amb .b{background:var(--ambarEsc)}
+.flip .f small{display:block;margin-top:8px;color:var(--fraco);font-family:var(--tf);font-size:12.5px}
+
+/* ---------- modal ---------- */
+.modal-bg{position:fixed;inset:0;background:#000a; display:flex;align-items:center;justify-content:center;
+  z-index:99;padding:18px}
+.modal-cx{background:var(--painel);border:1px solid var(--linha);border-radius:16px;max-width:520px;width:100%;padding:20px}
+.modal-corpo{font-size:16px}
+.modal-pe{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+
+/* ---------- rodapé de navegação ---------- */
+.proximo{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  background:var(--fundo2);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;margin:26px 0 0}
+.proximo a{font-family:var(--td);text-decoration:none;background:var(--ambar);color:#2a1806;
+  padding:10px 18px;border-radius:999px;font-weight:700}
+
+.oculto{display:none}
+@media(max-width:600px){
+  body{font-size:16px}
+  h1{font-size:24px}
+  .flip{height:210px}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .abas,.salvar,.placar,.proximo,.btn{display:none !important}
+  .card,.bloco,.q{border:1px solid #999;background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="topo"><div class="wrap"><span class="cracha">Setor Verde + Setor Âmbar</span><h1>📖 Leitura Guiada</h1><p class="subtopo">Geografia · 7º ano · Cap. 8 (Região Norte) e Cap. 9 (Região Nordeste) · prova 22/09</p><nav class="abas"><a href="leitura.html" class="ativa">📖 Leitura Guiada</a><a href="quiz.html">🎯 Quiz</a><a href="resumo.html">🗺️ Resumo</a><a href="simulado.html">📝 Simulado</a><a href="index.html">🏠 Início</a></nav></div></header>
+<div class="wrap">
+<div class="card verde">
+  <h2>🧭 Missão da expedição</h2>
+  <p>Você é o <b>jovem aprendiz cartógrafo</b> a bordo da sonda <b>Curupira</b>. São
+  <b>12 estações de coleta</b>: as nove primeiras mapeiam o <b>Setor Verde</b> (região Norte)
+  e as três últimas, o <b>Setor Âmbar</b> (região Nordeste).</p>
+  <p>Em cada estação você lê o relatório e responde <b>3 perguntas escrevendo com as suas
+  palavras</b>. A estação seguinte só destrava depois que você <b>conferir</b> a anterior.</p>
+  <div class="postit"><b>Regra da sonda:</b> resposta copiada do texto não vale. O sistema compara
+  o que você escreveu com o relatório — se for muito parecido, ele pede que você reescreva
+  com as suas palavras. Pode ser curto e simples, o que vale é ser <b>seu</b>.</div>
+</div>
+
+<div class="salvar">
+  <div><b>💾 Salvamento automático</b> <span class="pequeno" id="salvo-quando">ainda não salvo</span></div>
+  <div class="bts">
+    <button class="btn btn-2" onclick="salvarAgora()">💾 Salvar agora</button>
+    <button class="btn btn-2" onclick="exportarTudo()">📥 Exportar</button>
+    <button class="btn btn-2" onclick="importarTudo()">📤 Importar</button>
+    <button class="btn btn-v" onclick="zerarTudo()">🗑️ Zerar tudo</button>
+  </div>
+</div>
+<div id="caixa-export" class="card" style="display:none">
+  <b>Cópia de segurança</b> <span class="pequeno">— selecione tudo e copie para um bloco de notas.</span>
+  <textarea rows="6" readonly></textarea>
+</div>
+<div id="caixa-import" class="card" style="display:none">
+  <b>Colar a cópia de segurança</b>
+  <textarea rows="6" id="area-import" placeholder="Cole aqui o texto exportado..."></textarea>
+  <div style="margin-top:8px"><button class="btn btn-1" onclick="confirmarImport()">Restaurar</button></div>
+</div>
+
+<div class="card">
+  <b id="progresso-txt">0 de 12 estações concluídas</b>
+  <div class="prog"><i id="barra-geral"></i></div>
+</div>
+<div id="lista-blocos"></div>
+
+<div id="final" class="oculto">
+  <div class="card">
+    <h2>🎒 Diário de bordo — o que revisar</h2>
+    <div id="lista-revisar"></div>
+  </div>
+  <div class="card" style="border-left:5px solid var(--vermelho)">
+    <h2>🚨 As 10 pegadinhas da prova</h2>
+    <ol class="limpa" id="lista-pegadinhas"></ol>
+  </div>
+  <div class="card">
+    <h2>🗺️ Cobertura do conteúdo</h2>
+    <p class="pequeno">Confira que nenhum tópico do escopo ficou de fora.</p>
+    <table><thead><tr><th>Tópico do escopo</th><th>Onde está</th></tr></thead>
+    <tbody id="tab-cobertura"></tbody></table>
+  </div>
+<div class="proximo"><div>Terminou a leitura? Agora teste o que entendeu enquanto está fresco.</div><a href="quiz.html">🎯 Ir para o Quiz</a></div>
+</div>
+</div>
+<script>
+/* ====== NÚCLEO COMUM — Expedição Dois Biomas (Geografia 7º ano) ====== */
+var MEM = {};
+var Store = {
+  get: function (k) {
+    try { var v = localStorage.getItem(k); return v === null ? (MEM[k] === undefined ? null : MEM[k]) : v; }
+    catch (e) { return MEM[k] === undefined ? null : MEM[k]; }
+  },
+  set: function (k, v) { MEM[k] = v; try { localStorage.setItem(k, v); } catch (e) { } },
+  del: function (k) { delete MEM[k]; try { localStorage.removeItem(k); } catch (e) { } },
+  getJSON: function (k, def) { var v = this.get(k); if (!v) return def; try { return JSON.parse(v); } catch (e) { return def; } },
+  setJSON: function (k, o) { this.set(k, JSON.stringify(o)); }
+};
+
+function esc(t){ var d=document.createElement('div'); d.textContent=(t===undefined||t===null)?'':t; return d.innerHTML; }
+
+/* Modal desenhado na página (nunca alert/confirm/prompt) */
+function modal(titulo, corpoHTML, botoes) {
+  var velho = document.getElementById('modal-bg');
+  if (velho) velho.remove();
+  var bg = document.createElement('div');
+  bg.id = 'modal-bg'; bg.className = 'modal-bg';
+  var cx = document.createElement('div');
+  cx.className = 'modal-cx';
+  cx.innerHTML = '<h3>' + titulo + '</h3><div class="modal-corpo">' + corpoHTML + '</div>';
+  var pe = document.createElement('div'); pe.className = 'modal-pe';
+  (botoes || [{ texto: 'Fechar' }]).forEach(function (b) {
+    var bt = document.createElement('button');
+    bt.className = 'btn ' + (b.classe || 'btn-2');
+    bt.textContent = b.texto;
+    bt.onclick = function () { bg.remove(); if (b.acao) b.acao(); };
+    pe.appendChild(bt);
+  });
+  cx.appendChild(pe); bg.appendChild(cx); document.body.appendChild(bg);
+  return bg;
+}
+
+/* ====== RELATÓRIO: dados extras de cada material (sem tempo) ====== */
+var Meta = {
+  key: '',
+  init: function (k) { this.key = k; },
+  set: function (obj) {
+    var d = Store.getJSON(this.key + '_meta', {});
+    for (var p in obj) { if (obj.hasOwnProperty(p)) d[p] = obj[p]; }
+    Store.setJSON(this.key + '_meta', d);
+  },
+  get: function () { return Store.getJSON(this.key + '_meta', {}); }
+};
+
+/* ====== ANTICÓPIA ====== */
+var Anticopia = (function () {
+  function norm(t) {
+    return (t || '').toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function pal(t) { var n = norm(t); return n ? n.split(' ') : []; }
+  function marcar(a, b, min) {
+    var marcas = new Array(a.length).fill(0), maior = 0;
+    var prev = new Array(b.length + 1).fill(0);
+    for (var i = 0; i < a.length; i++) {
+      var cur = new Array(b.length + 1).fill(0);
+      for (var j = 0; j < b.length; j++) {
+        if (a[i] === b[j]) {
+          cur[j + 1] = prev[j] + 1;
+          if (cur[j + 1] > maior) maior = cur[j + 1];
+          if (cur[j + 1] >= min) { for (var k = 0; k < cur[j + 1]; k++) marcas[i - k] = 1; }
+        }
+      }
+      prev = cur;
+    }
+    return { marcas: marcas, maior: maior };
+  }
+  return {
+    ehCopia: function (resposta, textoBloco, pergunta) {
+      var r = pal(resposta);
+      if (r.length < 6) return false;
+      var citacao = marcar(r, pal(pergunta || ''), 4).marcas;
+      var livres = [];
+      for (var i = 0; i < r.length; i++) { if (!citacao[i]) livres.push(r[i]); }
+      if (livres.length < 6) return false;
+      var t = pal(textoBloco);
+      var m8 = marcar(livres, t, 8);
+      if (m8.maior >= 8) return true;
+      var m5 = marcar(livres, t, 5);
+      var soma = m5.marcas.reduce(function (x, y) { return x + y; }, 0);
+      return (soma / livres.length) > 0.6;
+    },
+    _norm: norm
+  };
+})();
+
+/* ====== PAINEL DE SALVAMENTO ====== */
+function painelSalvar(KEY, coletar, restaurar, aoZerar) {
+  function carimbo() {
+    var q = Store.get(KEY + '_quando');
+    var el = document.getElementById('salvo-quando');
+    if (el) el.textContent = q ? 'último salvamento: ' + q : 'ainda não salvo';
+  }
+  window.salvarAgora = function () {
+    Store.setJSON(KEY, coletar());
+    Store.set(KEY + '_quando', new Date().toLocaleString('pt-BR'));
+    carimbo();
+  };
+  window.exportarTudo = function () {
+    var pacote = { chave: KEY, dados: Store.getJSON(KEY, {}), relatorio: Store.getJSON(KEY + '_meta', {}), quando: Store.get(KEY + '_quando') };
+    var cx = document.getElementById('caixa-export');
+    cx.style.display = 'block';
+    cx.querySelector('textarea').value = JSON.stringify(pacote, null, 2);
+    cx.querySelector('textarea').select();
+  };
+  window.importarTudo = function () { document.getElementById('caixa-import').style.display = 'block'; };
+  window.confirmarImport = function () {
+    var txt = document.getElementById('area-import').value;
+    try {
+      var p = JSON.parse(txt);
+      if (p.dados) Store.setJSON(KEY, p.dados);
+      if (p.relatorio) Store.setJSON(KEY + '_meta', p.relatorio);
+      if (p.quando) Store.set(KEY + '_quando', p.quando);
+      modal('✅ Importado', '<p>Os dados voltaram. A página vai recarregar.</p>', [{ texto: 'Ok', classe: 'btn-1', acao: function () { location.reload(); } }]);
+    } catch (e) {
+      modal('❌ Não deu', '<p>Esse texto não parece um arquivo de backup válido.</p>', [{ texto: 'Ok', classe: 'btn-1' }]);
+    }
+  };
+  window.zerarTudo = function () {
+    modal('🗑️ Zerar tudo?', '<p>Isso apaga todas as respostas deste material. Não dá para desfazer.</p>',
+      [{ texto: 'Cancelar', classe: 'btn-2' },
+      { texto: 'Sim, apagar', classe: 'btn-v', acao: function () {
+          Store.del(KEY); Store.del(KEY + '_quando'); Store.del(KEY + '_meta');
+          if (aoZerar) aoZerar(); location.reload();
+      } }]);
+  };
+  carimbo();
+  if (restaurar) restaurar(Store.getJSON(KEY, null));
+  setInterval(function () { window.salvarAgora(); }, 15000);
+}
+
+/* ====== CÓDIGO DE LIBERAÇÃO (XX = acertos, YY = 2 letras sem I e O) ====== */
+function gerarCodigo(prefixo, acertos) {
+  var L = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  var y = L[Math.floor(Math.random() * L.length)] + L[Math.floor(Math.random() * L.length)];
+  var xx = (acertos < 10 ? '0' : '') + acertos;
+  return prefixo + '-' + xx + '-' + y;
+}
+
+/* ====== EMBARALHAR COM SEMENTE FIXA (guarda a correta pelo CONTEÚDO) ====== */
+function baralhar(lista, semente) {
+  var a = lista.slice(), s = semente;
+  function rnd() { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(rnd() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+var KEY = 'geo7_leitura';
+Meta.init(KEY);
+var D = {"blocos": [{"reg": "norte", "tit": "Estação 1 · O tamanho e a história do Norte", "html": "\n<p>A região Norte é a <b>maior região do Brasil em extensão</b>: são aproximadamente\n<b>3 850 593 km²</b>, mais de 40% de todo o território nacional. Ela é formada por sete\nestados: Acre, Amapá, Amazonas, Pará, Rondônia, Roraima e Tocantins. Entre eles, os dois\nmaiores em território são o <b>Amazonas</b> e o <b>Pará</b>.</p>\n<p>O mapa político da região mostra algo curioso: a <b>Linha do Equador</b> atravessa o\nNorte. Isso explica muita coisa que você vai ver mais adiante sobre o clima. E as capitais\nmais conhecidas aparecem aí: Manaus (AM), Belém (PA), Porto Velho (RO), Rio Branco (AC),\nBoa Vista (RR), Macapá (AP) e Palmas (TO).</p>\n<p>A história do território também tem duas datas que caem em prova. O <b>Acre</b> só\npassou a ser brasileiro em <b>1903</b>, quando foi comprado da Bolívia e anexado como\nterritório federal pelo <b>Tratado de Petrópolis</b>. Já o <b>Tocantins</b> é o estado mais\nnovo da região: foi criado em <b>1988</b>, separando-se da porção norte de Goiás.</p>\n<p>Outro detalhe histórico: por causa do <b>Tratado de Tordesilhas</b>, boa parte do oeste\ndo continente pertencia oficialmente aos espanhóis. Por isso os portugueses só começaram a\nexplorar a região <b>a partir do século XVII</b>. Hoje, segundo o Censo de 2022, moram ali\n<b>17 354 884 habitantes</b>.</p>\n", "puro": "A região Norte é a maior região do Brasil em extensão : são aproximadamente 3 850 593 km² , mais de 40% de todo o território nacional. Ela é formada por sete estados: Acre, Amapá, Amazonas, Pará, Rondônia, Roraima e Tocantins. Entre eles, os dois maiores em território são o Amazonas e o Pará . O mapa político da região mostra algo curioso: a Linha do Equador atravessa o Norte. Isso explica muita coisa que você vai ver mais adiante sobre o clima. E as capitais mais conhecidas aparecem aí: Manaus (AM), Belém (PA), Porto Velho (RO), Rio Branco (AC), Boa Vista (RR), Macapá (AP) e Palmas (TO). A história do território também tem duas datas que caem em prova. O Acre só passou a ser brasileiro em 1903 , quando foi comprado da Bolívia e anexado como território federal pelo Tratado de Petrópolis . Já o Tocantins é o estado mais novo da região: foi criado em 1988 , separando-se da porção norte de Goiás. Outro detalhe histórico: por causa do Tratado de Tordesilhas , boa parte do oeste do continente pertencia oficialmente aos espanhóis. Por isso os portugueses só começaram a explorar a região a partir do século XVII . Hoje, segundo o Censo de 2022, moram ali 17 354 884 habitantes .", "perg": [{"q": "Explique, com as suas palavras, por que o Acre e o Tocantins são casos especiais dentro da região Norte.", "modelo": "O Acre não nasceu brasileiro: foi comprado da Bolívia e anexado em 1903, pelo Tratado de Petrópolis. O Tocantins é o estado mais novo da região, criado em 1988 ao ser separado da parte norte de Goiás. Ou seja, os dois entraram na região por decisões políticas, e não desde sempre.", "checks": ["Minha resposta disse que o Acre foi anexado em 1903 (Tratado de Petrópolis)?", "Minha resposta disse que o Tocantins foi criado em 1988, a partir de Goiás?"]}, {"q": "Imagine que um primo seu de outro estado diga: “região Norte é tudo igual, é só floresta”. Escreva o que você responderia usando pelo menos dois dados desta estação.", "modelo": "Eu diria que o Norte é a maior região do país, com cerca de 3 850 593 km² e sete estados bem diferentes entre si, e que ali vivem mais de 17 milhões de pessoas em cidades grandes como Manaus e Belém. Floresta tem muita, mas a região é bem mais do que isso.", "checks": ["Usei pelo menos dois dados (tamanho, número de estados ou população)?", "Deixei claro que a região tem cidades e pessoas, não só floresta?"]}, {"q": "Crie uma frase de prova (tipo “pegadinha”) que troque uma informação desta estação por outra errada, e depois diga qual é o erro.", "modelo": "Frase: “O Tocantins foi anexado ao Brasil em 1903 pelo Tratado de Petrópolis.” O erro é a troca: quem entrou em 1903 pelo Tratado de Petrópolis foi o Acre; o Tocantins foi criado em 1988, a partir de Goiás.", "checks": ["Escrevi uma frase errada de propósito?", "Expliquei qual informação foi trocada e qual seria a certa?"]}]}, {"reg": "norte", "tit": "Estação 2 · O clima: por que chove tanto", "html": "\n<p>A região Norte é cortada pela <b>Linha do Equador</b>, e isso muda tudo. Perto do Equador\no planeta recebe muita radiação solar o ano inteiro. Resultado: as médias de temperatura\nficam <b>acima de 25 °C</b> e a <b>amplitude térmica é baixa</b> — amplitude térmica é a\ndiferença entre a temperatura média mais baixa e a mais alta do ano. Traduzindo: lá quase\nnão existe “inverno frio”, faz calor o ano todo.</p>\n<p>Chove muito também: o índice pluviométrico passa de <b>2 000 mm por ano</b>. Por isso o\nclima predominante da região é o <b>equatorial</b>, que é quente e úmido. Mas ele não é\nigual em todo lugar; o livro divide em três tipos, conforme a chuva varia.</p>\n<p>Na <b>porção ocidental</b> (a oeste, perto de Cruzeiro do Sul, no Acre) aparece o\n<b>equatorial superúmido</b>, que praticamente <b>não tem estação seca</b>. Na\n<b>porção leste de Roraima e em boa parte do Tocantins</b> aparece o\n<b>tropical semiúmido</b>, com verão chuvoso e inverno seco — é o único dos três que não é\nequatorial. No restante da região predomina o <b>equatorial úmido</b>, que tem uma\n<b>curta estação seca</b> durante o ano.</p>\n<p>Uma dica para ler climograma: as <b>barras azuis</b> mostram a chuva de cada mês e a\n<b>linha vermelha</b> mostra a temperatura. Se as barras somem por vários meses, existe\nestação seca; se elas quase não baixam, o clima é superúmido.</p>\n", "puro": "A região Norte é cortada pela Linha do Equador , e isso muda tudo. Perto do Equador o planeta recebe muita radiação solar o ano inteiro. Resultado: as médias de temperatura ficam acima de 25 °C e a amplitude térmica é baixa — amplitude térmica é a diferença entre a temperatura média mais baixa e a mais alta do ano. Traduzindo: lá quase não existe “inverno frio”, faz calor o ano todo. Chove muito também: o índice pluviométrico passa de 2 000 mm por ano . Por isso o clima predominante da região é o equatorial , que é quente e úmido. Mas ele não é igual em todo lugar; o livro divide em três tipos, conforme a chuva varia. Na porção ocidental (a oeste, perto de Cruzeiro do Sul, no Acre) aparece o equatorial superúmido , que praticamente não tem estação seca . Na porção leste de Roraima e em boa parte do Tocantins aparece o tropical semiúmido , com verão chuvoso e inverno seco — é o único dos três que não é equatorial. No restante da região predomina o equatorial úmido , que tem uma curta estação seca durante o ano. Uma dica para ler climograma: as barras azuis mostram a chuva de cada mês e a linha vermelha mostra a temperatura. Se as barras somem por vários meses, existe estação seca; se elas quase não baixam, o clima é superúmido.", "perg": [{"q": "Explique com as suas palavras o que significa “amplitude térmica baixa” e por que isso acontece na região Norte.", "modelo": "Amplitude térmica é a diferença entre a temperatura média mais fria e a mais quente do ano. No Norte essa diferença é pequena porque a região fica sobre a Linha do Equador e recebe muita luz do Sol o ano inteiro, então faz calor parecido em todos os meses.", "checks": ["Expliquei que amplitude térmica é a diferença entre as médias mínima e máxima?", "Liguei a amplitude baixa à posição sobre a Linha do Equador / radiação solar o ano todo?"]}, {"q": "Um climograma de uma cidade do Norte mostra barras de chuva altas em todos os meses, sem nenhum mês seco. Qual dos três tipos de clima é esse e em que parte da região ele aparece? Justifique.", "modelo": "É o equatorial superúmido, típico da porção ocidental (oeste) da região, como em Cruzeiro do Sul, no Acre. Justifica-se porque esse é o único dos três tipos que não apresenta estação seca.", "checks": ["Identifiquei o clima equatorial superúmido?", "Disse que ele fica na porção ocidental (oeste) da região?", "Justifiquei pela ausência de estação seca?"]}, {"q": "Palmas (TO) tem verão chuvoso e inverno seco. Escreva uma explicação curta, como se fosse para um colega do 5º ano, de por que Palmas não entra no grupo “equatorial”.", "modelo": "Palmas fica na parte da região onde o clima é tropical semiúmido: lá chove bastante no verão, mas o inverno fica seco de verdade, com vários meses quase sem chuva. Como o clima equatorial é quente e úmido o ano todo, Palmas não se encaixa nesse grupo.", "checks": ["Nomeei o clima tropical semiúmido?", "Expliquei a diferença usando verão chuvoso e inverno seco?"]}]}, {"reg": "norte", "tit": "Estação 3 · Massas de ar e a friagem", "html": "\n<p>Massas de ar são grandes “blocos” de ar com temperatura e umidade parecidas, que se\ndeslocam e mudam o tempo por onde passam. Na região Norte, três delas são as estrelas da\nprova.</p>\n<p>A <b>massa Equatorial continental (mEc)</b> é <b>quente e úmida</b> e se forma\n<b>dentro do continente</b>, perto da Linha do Equador, sobre a Floresta Amazônica. Ela\nrecolhe a umidade que vem da <b>evapotranspiração</b> das plantas e dos rios. Em\n<b>dezembro e janeiro</b>, a mEc avança até a região Centro-Sul do Brasil e leva calor e as\nchuvas de verão para lá.</p>\n<p>A <b>massa Equatorial atlântica (mEa)</b> também é quente e úmida, mas a diferença está\nna origem: ela nasce <b>sobre o oceano</b> (origem oceânica), e não dentro do continente.</p>\n<p>No <b>inverno do Hemisfério Sul</b>, a <b>massa Polar atlântica (mPa)</b> ganha força e\nconsegue chegar até a Amazônia. Quando isso acontece, a temperatura cai de repente e esse\nfenômeno recebe o nome de <b>friagem</b>. Ou seja: mesmo numa região de calor o ano todo,\nexistem dias de frio repentino.</p>\n", "puro": "Massas de ar são grandes “blocos” de ar com temperatura e umidade parecidas, que se deslocam e mudam o tempo por onde passam. Na região Norte, três delas são as estrelas da prova. A massa Equatorial continental (mEc) é quente e úmida e se forma dentro do continente , perto da Linha do Equador, sobre a Floresta Amazônica. Ela recolhe a umidade que vem da evapotranspiração das plantas e dos rios. Em dezembro e janeiro , a mEc avança até a região Centro-Sul do Brasil e leva calor e as chuvas de verão para lá. A massa Equatorial atlântica (mEa) também é quente e úmida, mas a diferença está na origem: ela nasce sobre o oceano (origem oceânica), e não dentro do continente. No inverno do Hemisfério Sul , a massa Polar atlântica (mPa) ganha força e consegue chegar até a Amazônia. Quando isso acontece, a temperatura cai de repente e esse fenômeno recebe o nome de friagem . Ou seja: mesmo numa região de calor o ano todo, existem dias de frio repentino.", "perg": [{"q": "A mEc e a mEa são as duas quentes e úmidas. Escreva qual é a diferença entre elas.", "modelo": "A diferença está na origem: a mEc (Equatorial continental) se forma dentro do continente, sobre a Floresta Amazônica, e pega umidade da evapotranspiração das plantas e dos rios; a mEa (Equatorial atlântica) tem origem oceânica, ou seja, se forma sobre o oceano.", "checks": ["Disse que a mEc é continental e se forma sobre a floresta?", "Disse que a mEa tem origem oceânica?"]}, {"q": "Em julho, um morador de Rondônia posta: “hoje precisei de casaco!”. Explique, com as suas palavras, qual massa de ar provocou isso e como esse fenômeno se chama.", "modelo": "Foi a massa Polar atlântica (mPa), que no inverno do Hemisfério Sul ganha força e consegue chegar até a Amazônia. Quando ela chega, a temperatura cai de repente e esse fenômeno é chamado de friagem.", "checks": ["Identifiquei a massa Polar atlântica (mPa)?", "Usei o nome friagem?", "Liguei o fato ao inverno no Hemisfério Sul?"]}, {"q": "Escreva uma frase curta explicando por que quem mora em São Paulo deveria se importar com a Floresta Amazônica, usando o que você leu sobre a mEc.", "modelo": "Porque a mEc se forma sobre a floresta e leva essa umidade para o Centro-Sul do país em dezembro e janeiro, trazendo as chuvas de verão. Se a floresta diminui, a umidade que chega a São Paulo também pode diminuir.", "checks": ["Liguei a mEc à umidade que vem da floresta?", "Disse que ela alcança o Centro-Sul, trazendo chuva de verão?"]}]}, {"reg": "norte", "tit": "Estação 4 · A vegetação e o “telhado verde” da Amazônia", "html": "\n<p>Clima e vegetação vivem de mãos dadas no Norte. A região tem <b>quatro tipos</b> de\nvegetação: <b>Cerrado</b>; <b>Campos de hileia</b> (uma vegetação rasteira de áreas\nalagadiças); a <b>Floresta Amazônica</b>, que cobre a maior parte da região; e a\n<b>vegetação litorânea</b>.</p>\n<p>A Amazônia é considerada a <b>maior floresta tropical do planeta</b>. Ela ocupa boa parte\ndo norte da América do Sul, mas as maiores extensões do bioma estão no Brasil. Suas copas\nformam um verdadeiro <b>telhado verde</b>: a <b>densidade vegetal</b> é tão alta que quase\nnão passa luz para o solo, deixando o chão escuro e úmido.</p>\n<p>As árvores têm folhas largas e amplas — são as <b>latifoliadas</b> — e a maioria mantém\nas folhas o ano inteiro. Por isso a floresta é chamada de <b>perenifólia</b>, ou “floresta\nsempre-verde”. Folha grande captura mais luz, o que ajuda na fotossíntese e no crescimento\nda planta.</p>\n<p>Dois conceitos fecham a estação. <b>Biomassa</b> é a matéria orgânica de origem vegetal\nou animal usada como fonte de energia renovável — e a Amazônia tem a <b>maior biomassa\nterrestre do planeta</b>. <b>Serrapilheira</b> é a camada formada sobre o solo pela queda\nde folhas, caules, frutos, flores, restos de animais e material fecal. Ela é a\n<b>principal forma de reciclagem de nutrientes</b>, retém a umidade do solo, promove o\nisolamento térmico, funciona como banco de sementes e protege contra a erosão e a lixiviação.</p>\n", "puro": "Clima e vegetação vivem de mãos dadas no Norte. A região tem quatro tipos de vegetação: Cerrado ; Campos de hileia (uma vegetação rasteira de áreas alagadiças); a Floresta Amazônica , que cobre a maior parte da região; e a vegetação litorânea . A Amazônia é considerada a maior floresta tropical do planeta . Ela ocupa boa parte do norte da América do Sul, mas as maiores extensões do bioma estão no Brasil. Suas copas formam um verdadeiro telhado verde : a densidade vegetal é tão alta que quase não passa luz para o solo, deixando o chão escuro e úmido. As árvores têm folhas largas e amplas — são as latifoliadas — e a maioria mantém as folhas o ano inteiro. Por isso a floresta é chamada de perenifólia , ou “floresta sempre-verde”. Folha grande captura mais luz, o que ajuda na fotossíntese e no crescimento da planta. Dois conceitos fecham a estação. Biomassa é a matéria orgânica de origem vegetal ou animal usada como fonte de energia renovável — e a Amazônia tem a maior biomassa terrestre do planeta . Serrapilheira é a camada formada sobre o solo pela queda de folhas, caules, frutos, flores, restos de animais e material fecal. Ela é a principal forma de reciclagem de nutrientes , retém a umidade do solo, promove o isolamento térmico, funciona como banco de sementes e protege contra a erosão e a lixiviação.", "perg": [{"q": "Explique, como se fosse para um colega mais novo, o que é serrapilheira e por que ela é tão importante.", "modelo": "Serrapilheira é aquela camada de folhas, galhos, frutos e restos que cai e se acumula em cima do solo da floresta. Ela é importante porque devolve nutrientes para o solo, segura a umidade, protege o chão do calor e da erosão e ainda guarda sementes que podem germinar depois.", "checks": ["Expliquei que é a camada de matéria orgânica que cai sobre o solo?", "Citei pelo menos duas funções (nutrientes, umidade, erosão, banco de sementes)?"]}, {"q": "Por que uma folha larga (latifoliada) é uma vantagem para uma árvore que vive debaixo do “telhado verde”? Responda pensando na luz.", "modelo": "Porque a densidade das copas deixa passar pouquíssima luz para baixo. Uma folha larga tem mais superfície para capturar a luz que sobra, o que favorece a fotossíntese e o crescimento da planta.", "checks": ["Liguei a folha larga à captura de luz / fotossíntese?", "Mencionei que chega pouca luz ao solo por causa das copas densas?"]}, {"q": "Dê um exemplo NOVO (que não está no texto) de biomassa usada como fonte de energia e explique por que ele se encaixa nessa definição.", "modelo": "O bagaço da cana-de-açúcar queimado nas usinas para gerar energia. Ele se encaixa porque é matéria orgânica de origem vegetal usada como fonte de energia e pode ser reposta com novas plantações, ou seja, é renovável.", "checks": ["Dei um exemplo que não aparece no texto?", "Expliquei que é matéria orgânica usada como fonte de energia renovável?"]}]}, {"reg": "norte", "tit": "Estação 5 · Terra firme, várzea, igapó e as chuvas convectivas", "html": "\n<p>Dentro da Amazônia a vegetação muda conforme os <b>ciclos de inundação</b>. As matas\n<b>inundáveis</b> se dividem em <b>várzea</b> e <b>igapó</b>; as que <b>não sofrem</b>\ninfluência das inundações são as <b>matas de terra firme</b>.</p>\n<p>A <b>mata de terra firme</b> ocupa cerca de <b>80%</b> da floresta. É a parte mais alta,\ncom a vegetação mais densa e as árvores maiores; ali estão espécies como a castanheira, o\nmogno e a sumaúma. As <b>várzeas</b> se desenvolvem na planície amazônica e em alguns\nafluentes: os rios trazem sedimentos e matéria orgânica, o que deixa o <b>solo rico em\nnutrientes</b> e bom para a agricultura. Os <b>igapós</b> ficam bem próximos das margens\ndos rios e permanecem alagados por mais tempo — por isso as árvores precisam de adaptações,\ncomo <b>raízes aéreas</b>, e aparecem plantas aquáticas como a <b>vitória-régia</b>.</p>\n<p>A floresta também fabrica a própria chuva. Durante o dia o calor provoca a\n<b>evaporação</b> da água dos rios e a <b>transpiração</b> das folhas; juntando os dois\nprocessos, temos a <b>evapotranspiração</b>. Esse vapor carrega as nuvens e, no fim do dia,\ncom a queda da temperatura, ele se condensa e cai em pancadas rápidas e intensas: são as\n<b>chuvas convectivas</b>. Parte da água infiltra no solo e abastece as bacias, parte\nevapora de novo e o <b>ciclo</b> recomeça.</p>\n<p>Por fim, a Amazônia faz o <b>sequestro de carbono</b>: pela fotossíntese as plantas\nabsorvem o dióxido de carbono da atmosfera, armazenam esse carbono na biomassa e liberam\noxigênio, reduzindo o aumento dos gases responsáveis pelo efeito estufa.</p>\n", "puro": "Dentro da Amazônia a vegetação muda conforme os ciclos de inundação . As matas inundáveis se dividem em várzea e igapó ; as que não sofrem influência das inundações são as matas de terra firme . A mata de terra firme ocupa cerca de 80% da floresta. É a parte mais alta, com a vegetação mais densa e as árvores maiores; ali estão espécies como a castanheira, o mogno e a sumaúma. As várzeas se desenvolvem na planície amazônica e em alguns afluentes: os rios trazem sedimentos e matéria orgânica, o que deixa o solo rico em nutrientes e bom para a agricultura. Os igapós ficam bem próximos das margens dos rios e permanecem alagados por mais tempo — por isso as árvores precisam de adaptações, como raízes aéreas , e aparecem plantas aquáticas como a vitória-régia . A floresta também fabrica a própria chuva. Durante o dia o calor provoca a evaporação da água dos rios e a transpiração das folhas; juntando os dois processos, temos a evapotranspiração . Esse vapor carrega as nuvens e, no fim do dia, com a queda da temperatura, ele se condensa e cai em pancadas rápidas e intensas: são as chuvas convectivas . Parte da água infiltra no solo e abastece as bacias, parte evapora de novo e o ciclo recomeça. Por fim, a Amazônia faz o sequestro de carbono : pela fotossíntese as plantas absorvem o dióxido de carbono da atmosfera, armazenam esse carbono na biomassa e liberam oxigênio, reduzindo o aumento dos gases responsáveis pelo efeito estufa.", "perg": [{"q": "Uma família quer plantar numa área que alaga todo ano e recebe sedimentos do rio. Qual das três matas descreve esse lugar, e por que ele é bom para a agricultura?", "modelo": "É a várzea. Ela é boa para a agricultura porque as águas dos rios depositam sedimentos e matéria orgânica na área, deixando o solo rico em nutrientes.", "checks": ["Identifiquei a várzea?", "Expliquei que os sedimentos e a matéria orgânica deixam o solo rico em nutrientes?"]}, {"q": "Explique com as suas palavras, em três passos, como a floresta “fabrica” a própria chuva.", "modelo": "Primeiro o calor do dia faz a água dos rios evaporar e as folhas transpirarem, o que junto se chama evapotranspiração. Depois esse vapor sobe e carrega as nuvens de umidade. No fim do dia a temperatura cai, o vapor se condensa e cai em pancadas rápidas e fortes, as chuvas convectivas. Parte da água infiltra no solo e parte volta a evaporar, recomeçando o ciclo.", "checks": ["Citei a evapotranspiração (evaporação + transpiração)?", "Falei da condensação com a queda da temperatura?", "Usei o nome chuvas convectivas?"]}, {"q": "Escreva uma manchete de jornal (uma frase) que explique por que derrubar a Amazônia piora o efeito estufa.", "modelo": "“Menos floresta, mais carbono no ar: derrubada da Amazônia reduz o sequestro de carbono e agrava o efeito estufa.” A ideia é que as plantas absorvem o gás carbônico e o guardam na biomassa; sem elas, esse gás fica na atmosfera.", "checks": ["Minha manchete liga a floresta ao sequestro de carbono?", "Expliquei que menos plantas significa mais gás carbônico na atmosfera?"]}]}, {"reg": "norte", "tit": "Estação 6 · Relevo e hidrografia do Norte", "html": "\n<p>O relevo do Norte tem <b>três unidades</b>: <b>planaltos</b>, <b>depressões</b> e\n<b>planícies</b>. As altitudes são, em geral, <b>modestas</b>, com exceção de alguns pontos\nisolados: o <b>Pico da Neblina</b> e o <b>Pico 31 de Março</b>, ambos no <b>Amazonas</b>,\nchegam perto dos <b>3 000 metros</b>.</p>\n<p>No mapa e no perfil A–B dá para ver a lógica: ao <b>norte e ao sul</b> da região aparecem\nos <b>planaltos residuais</b> (Norte-Amazônicos e Sul-Amazônicos) e as <b>depressões\nmarginais</b>; e ao <b>longo do leito do Rio Amazonas e do litoral</b> ficam as\n<b>planícies sedimentares</b>.</p>\n<p>Relevo e rio andam juntos. Nos <b>planaltos</b>, onde o terreno é acidentado, as águas\ncorrem com <b>força e velocidade</b> — condição ideal para <b>usinas hidrelétricas</b>. Nas\n<b>planícies</b>, os rios caudalosos favorecem a <b>navegação</b>, como acontece no Rio\nAmazonas. Em muitas comunidades ribeirinhas o barco é o principal meio de transporte,\nporque as estradas são poucas ou mal conservadas.</p>\n<p>A <b>Bacia Hidrográfica Amazônica</b> é a <b>maior do planeta</b>: concentra cerca de\n<b>68% das águas superficiais do Brasil</b> e cerca de <b>20% da água doce superficial em\nforma líquida</b> do mundo. Tem mais de 3,9 milhões de km² no território brasileiro e mais\nde 5,8 milhões de km² se contarmos os países vizinhos. O <b>Rio Amazonas</b> nasce nos\nAndes peruanos e, no Brasil, recebe esse nome só <b>a partir do encontro do Rio Negro com o\nRio Solimões</b>; seu regime é <b>misto</b>, porque recebe água do derretimento da neve\n(regime <b>nival</b>) e das chuvas equatoriais (regime <b>pluvial</b>).</p>\n<p>A outra bacia importante é a <b>Tocantins-Araguaia</b>, com cerca de 967 059 km² e\naproximadamente <b>10% do território brasileiro</b>; seus rios principais são o\n<b>Tocantins</b> (cerca de 2 416 km) e o <b>Araguaia</b> (cerca de 2 115 km). Debaixo do\nchão ainda existe o <b>Aquífero SAGA</b> (Sistema Aquífero Grande Amazônia), com cerca de\n162 520 km³ — o maior volume de água subterrânea do planeta — e o <b>Rio Hamza</b>, um fluxo\nde água que estaria a cerca de <b>4 000 metros abaixo</b> do Rio Amazonas.</p>\n", "puro": "O relevo do Norte tem três unidades : planaltos , depressões e planícies . As altitudes são, em geral, modestas , com exceção de alguns pontos isolados: o Pico da Neblina e o Pico 31 de Março , ambos no Amazonas , chegam perto dos 3 000 metros . No mapa e no perfil A–B dá para ver a lógica: ao norte e ao sul da região aparecem os planaltos residuais (Norte-Amazônicos e Sul-Amazônicos) e as depressões marginais ; e ao longo do leito do Rio Amazonas e do litoral ficam as planícies sedimentares . Relevo e rio andam juntos. Nos planaltos , onde o terreno é acidentado, as águas correm com força e velocidade — condição ideal para usinas hidrelétricas . Nas planícies , os rios caudalosos favorecem a navegação , como acontece no Rio Amazonas. Em muitas comunidades ribeirinhas o barco é o principal meio de transporte, porque as estradas são poucas ou mal conservadas. A Bacia Hidrográfica Amazônica é a maior do planeta : concentra cerca de 68% das águas superficiais do Brasil e cerca de 20% da água doce superficial em forma líquida do mundo. Tem mais de 3,9 milhões de km² no território brasileiro e mais de 5,8 milhões de km² se contarmos os países vizinhos. O Rio Amazonas nasce nos Andes peruanos e, no Brasil, recebe esse nome só a partir do encontro do Rio Negro com o Rio Solimões ; seu regime é misto , porque recebe água do derretimento da neve (regime nival ) e das chuvas equatoriais (regime pluvial ). A outra bacia importante é a Tocantins-Araguaia , com cerca de 967 059 km² e aproximadamente 10% do território brasileiro ; seus rios principais são o Tocantins (cerca de 2 416 km) e o Araguaia (cerca de 2 115 km). Debaixo do chão ainda existe o Aquífero SAGA (Sistema Aquífero Grande Amazônia), com cerca de 162 520 km³ — o maior volume de água subterrânea do planeta — e o Rio Hamza , um fluxo de água que estaria a cerca de 4 000 metros abaixo do Rio Amazonas.", "perg": [{"q": "Por que um rio que corre num planalto é melhor para gerar energia e um rio de planície é melhor para navegar? Explique com as suas palavras.", "modelo": "No planalto o terreno é acidentado, então a água desce com muita força e velocidade, e essa força é o que move as turbinas das hidrelétricas. Na planície o terreno é plano, o rio fica largo e caudaloso e corre mais calmo, o que permite que os barcos naveguem com segurança.", "checks": ["Liguei o planalto ao terreno acidentado e à força/velocidade da água?", "Liguei a planície aos rios caudalosos e à navegação?"]}, {"q": "Um colega escreveu na prova: “o Rio Amazonas nasce no Brasil e tem regime só pluvial”. Aponte os DOIS erros e escreva a versão certa.", "modelo": "Primeiro erro: ele nasce nos Andes peruanos, não no Brasil, e só recebe o nome Amazonas depois do encontro do Rio Negro com o Rio Solimões. Segundo erro: o regime é misto, porque junta o derretimento da neve (nival) com as chuvas equatoriais (pluvial).", "checks": ["Corrigi a nascente (Andes peruanos)?", "Corrigi o regime para misto (nival + pluvial)?"]}, {"q": "Explique para alguém que nunca ouviu falar no assunto qual é a diferença entre a Bacia Amazônica e o Aquífero SAGA.", "modelo": "A Bacia Amazônica é a água de superfície: rios, afluentes e toda a área que eles drenam, e é a maior bacia do mundo. O Aquífero SAGA é água subterrânea, guardada embaixo do chão em rochas porosas, e tem o maior volume de água subterrânea do planeta. Um está em cima, o outro está embaixo.", "checks": ["Disse que a bacia é água de superfície (rios)?", "Disse que o aquífero é água subterrânea, guardada em rochas?"]}]}, {"reg": "norte", "tit": "Estação 7 · Quem ocupou o Norte: dos indígenas ao ciclo da borracha", "html": "\n<p>A população do Norte tem composição étnico-racial bem diversificada. Segundo o IBGE,\n<b>67,1%</b> se declaram <b>pardos</b>, <b>20,8%</b> <b>brancos</b>, 8,9% amarelos, 3,1%\npretos e <b>0,1% indígenas</b>. Mesmo sendo um número pequeno, essa é a\n<b>maior concentração de população autodeclarada indígena</b> do país, e isso tem a ver com\na forma como a região foi ocupada.</p>\n<p>Durante milênios, os povos indígenas produziram técnicas e conhecimentos sobre a fauna e\na flora e desenvolveram modos de vida em harmonia com a natureza. Com a chegada dos\nportugueses, esses grupos entraram em decadência e acabaram se concentrando em áreas de\nfloresta preservada.</p>\n<p>Nos <b>séculos XVI a XVIII</b>, a colonização foi <b>muito lenta</b>: a floresta\nequatorial, as bacias hidrográficas densas e doenças como a <b>malária</b> e a\n<b>febre amarela</b> dificultavam a ocupação. Os portugueses começaram construindo\n<b>fortificações</b> nas margens dos rios e <b>missões religiosas</b>. No\n<b>século XVII</b>, <b>Belém (PA)</b> já era o maior núcleo urbano da região, por causa do\ncomércio e da exportação das <b>“drogas do sertão”</b> (cravo, baunilha, cacau, guaraná,\nurucum).</p>\n<p>A virada veio com o <b>Ciclo da Borracha</b>, no fim do século XIX e início do XX. A\ndemanda mundial cresceu por causa da indústria automobilística e da indústria bélica na\nPrimeira Guerra Mundial, e milhares de <b>migrantes nordestinos</b> foram trabalhar nos\n<b>seringais</b>, principalmente na porção ocidental. A riqueza da borracha ajudou a urbanizar\na região e a formar as duas maiores cidades do Norte: <b>Belém e Manaus</b>. Dois marcos da\népoca: a <b>compra do Acre em 1903</b> e a inauguração da <b>Estrada de Ferro\nMadeira-Mamoré em 1912</b>.</p>\n<p>Já nas décadas de <b>1960 e 1970</b>, os <b>governos militares</b> induziram migrações e\nexpandiram a fronteira econômica, criando a região de planejamento chamada\n<b>Amazônia Legal</b>. Além dos estados do Norte, ela inclui o <b>Mato Grosso</b> e a\n<b>porção ocidental do Maranhão</b>. O órgão responsável pelo planejamento foi a\n<b>SUDAM</b> (Superintendência de Desenvolvimento da Amazônia). Não confunda com a\n<b>Amazônia Internacional</b>, que é a floresta e a bacia do Amazonas <b>além do Brasil</b>,\nem países como Bolívia, Peru, Equador, Colômbia, Venezuela, Guiana, Suriname e Guiana Francesa.</p>\n", "puro": "A população do Norte tem composição étnico-racial bem diversificada. Segundo o IBGE, 67,1% se declaram pardos , 20,8% brancos , 8,9% amarelos, 3,1% pretos e 0,1% indígenas . Mesmo sendo um número pequeno, essa é a maior concentração de população autodeclarada indígena do país, e isso tem a ver com a forma como a região foi ocupada. Durante milênios, os povos indígenas produziram técnicas e conhecimentos sobre a fauna e a flora e desenvolveram modos de vida em harmonia com a natureza. Com a chegada dos portugueses, esses grupos entraram em decadência e acabaram se concentrando em áreas de floresta preservada. Nos séculos XVI a XVIII , a colonização foi muito lenta : a floresta equatorial, as bacias hidrográficas densas e doenças como a malária e a febre amarela dificultavam a ocupação. Os portugueses começaram construindo fortificações nas margens dos rios e missões religiosas . No século XVII , Belém (PA) já era o maior núcleo urbano da região, por causa do comércio e da exportação das “drogas do sertão” (cravo, baunilha, cacau, guaraná, urucum). A virada veio com o Ciclo da Borracha , no fim do século XIX e início do XX. A demanda mundial cresceu por causa da indústria automobilística e da indústria bélica na Primeira Guerra Mundial, e milhares de migrantes nordestinos foram trabalhar nos seringais , principalmente na porção ocidental. A riqueza da borracha ajudou a urbanizar a região e a formar as duas maiores cidades do Norte: Belém e Manaus . Dois marcos da época: a compra do Acre em 1903 e a inauguração da Estrada de Ferro Madeira-Mamoré em 1912 . Já nas décadas de 1960 e 1970 , os governos militares induziram migrações e expandiram a fronteira econômica, criando a região de planejamento chamada Amazônia Legal . Além dos estados do Norte, ela inclui o Mato Grosso e a porção ocidental do Maranhão . O órgão responsável pelo planejamento foi a SUDAM (Superintendência de Desenvolvimento da Amazônia). Não confunda com a Amazônia Internacional , que é a floresta e a bacia do Amazonas além do Brasil , em países como Bolívia, Peru, Equador, Colômbia, Venezuela, Guiana, Suriname e Guiana Francesa.", "perg": [{"q": "Por que a colonização portuguesa do Norte foi tão lenta nos séculos XVI a XVIII? Escreva com as suas palavras.", "modelo": "Porque as condições naturais atrapalhavam muito: a floresta equatorial fechada, as bacias hidrográficas densas e doenças como a malária e a febre amarela tornavam difícil entrar e permanecer na região.", "checks": ["Citei as condições naturais (floresta densa, rios/bacias)?", "Citei as doenças, como malária e febre amarela?"]}, {"q": "Explique a ligação entre a Primeira Guerra Mundial e o crescimento de Manaus e Belém.", "modelo": "A guerra e a indústria automobilística aumentaram muito a demanda mundial por borracha. Isso valorizou os seringais da Amazônia, atraiu milhares de migrantes nordestinos e gerou riqueza com a exportação, o que impulsionou a urbanização e fez Belém e Manaus crescerem e virarem as duas maiores cidades da região.", "checks": ["Liguei a guerra e a indústria à alta demanda por borracha?", "Expliquei que a riqueza e a migração levaram à urbanização de Belém e Manaus?"]}, {"q": "Uma prova traz: “a Amazônia Legal é formada apenas pelos sete estados da região Norte”. Diga se está certo ou errado e corrija.", "modelo": "Está errado. Além dos estados do Norte, a Amazônia Legal inclui o Mato Grosso, que fica no Centro-Oeste, e a porção ocidental do Maranhão, que fica no Nordeste. Ela é uma região de planejamento, não a mesma coisa que a região Norte.", "checks": ["Disse que a afirmação está errada?", "Citei Mato Grosso e a porção ocidental do Maranhão?"]}]}, {"reg": "norte", "tit": "Estação 8 · Estratégias de integração: estradas, Zona Franca, minas e energia", "html": "\n<p>A região Norte fica longe do centro econômico do país, o Sudeste, e teve por muito tempo\num desenvolvimento econômico e social menor que o das outras regiões. Para mudar isso, o\nEstado adotou várias <b>estratégias de integração</b>.</p>\n<p><b>Sistemas de transporte.</b> Foram abertas grandes rodovias ligando o Norte ao resto do\npaís: a <b>Transamazônica</b>, a <b>Perimetral Norte</b>, a <b>Santarém-Cuiabá</b> e a\n<b>Manaus-Porto Velho</b>. Além de integrar, as estradas serviam para <b>orientar os\nmigrantes</b> na ocupação da região.</p>\n<p><b>Industrialização.</b> Em <b>1967</b> foi criada a <b>Zona Franca de Manaus</b>, graças\na políticas de estímulo à industrialização: <b>redução de impostos</b> (incentivo fiscal) e\nmenos burocracia. Em apenas dez anos, essa zona industrial transformou Manaus num importante\ncentro industrial e comercial do Brasil. Hoje reúne cerca de <b>500 empreendimentos</b>,\nvoltados principalmente para a produção de <b>eletrônicos</b>. Os quatro atrativos que a\nprova costuma cobrar: <b>localização estratégica, incentivo fiscal, infraestrutura e mão de\nobra qualificada</b>.</p>\n<p><b>Mineração.</b> A riqueza mineral levou a grandes projetos de extração em larga escala\nde minerais metálicos, como <b>manganês, alumínio, ouro e ferro</b>. O mais importante foi o\n<b>Programa Grande Carajás (PGC)</b>, que transformou o <b>Pará</b> em um dos maiores\nexportadores de <b>minério de ferro</b> do mundo. O complexo mineral da <b>Serra dos\nCarajás</b> integrou a região ao restante do país e gerou emprego e renda no entorno.</p>\n<p><b>Infraestrutura energética.</b> Com mais gente e mais indústrias, a demanda por energia\nelétrica cresceu. A saída foi expandir a distribuição com grandes <b>usinas hidrelétricas</b>,\ncomo <b>Tucuruí</b> (no Rio Tocantins, no Pará) e <b>Balbina</b>.</p>\n", "puro": "A região Norte fica longe do centro econômico do país, o Sudeste, e teve por muito tempo um desenvolvimento econômico e social menor que o das outras regiões. Para mudar isso, o Estado adotou várias estratégias de integração . Sistemas de transporte. Foram abertas grandes rodovias ligando o Norte ao resto do país: a Transamazônica , a Perimetral Norte , a Santarém-Cuiabá e a Manaus-Porto Velho . Além de integrar, as estradas serviam para orientar os migrantes na ocupação da região. Industrialização. Em 1967 foi criada a Zona Franca de Manaus , graças a políticas de estímulo à industrialização: redução de impostos (incentivo fiscal) e menos burocracia. Em apenas dez anos, essa zona industrial transformou Manaus num importante centro industrial e comercial do Brasil. Hoje reúne cerca de 500 empreendimentos , voltados principalmente para a produção de eletrônicos . Os quatro atrativos que a prova costuma cobrar: localização estratégica, incentivo fiscal, infraestrutura e mão de obra qualificada . Mineração. A riqueza mineral levou a grandes projetos de extração em larga escala de minerais metálicos, como manganês, alumínio, ouro e ferro . O mais importante foi o Programa Grande Carajás (PGC) , que transformou o Pará em um dos maiores exportadores de minério de ferro do mundo. O complexo mineral da Serra dos Carajás integrou a região ao restante do país e gerou emprego e renda no entorno. Infraestrutura energética. Com mais gente e mais indústrias, a demanda por energia elétrica cresceu. A saída foi expandir a distribuição com grandes usinas hidrelétricas , como Tucuruí (no Rio Tocantins, no Pará) e Balbina .", "perg": [{"q": "Escreva, com as suas palavras, dois motivos que fizeram indústrias escolherem Manaus em vez de outra cidade.", "modelo": "Primeiro, o incentivo fiscal: o Estado reduziu impostos e a burocracia, o que barateia produzir ali. Segundo, a localização estratégica somada à infraestrutura e à mão de obra qualificada que a cidade passou a oferecer.", "checks": ["Citei o incentivo fiscal / redução de impostos?", "Citei outro fator (localização estratégica, infraestrutura ou mão de obra qualificada)?"]}, {"q": "Explique por que construir uma rodovia não é só “fazer estrada”, pensando no objetivo que o Estado tinha na época.", "modelo": "Porque as rodovias também serviam para conduzir a ocupação: elas orientavam para onde os migrantes deveriam ir e por onde a fronteira econômica ia se expandir. Além de ligar o Norte ao resto do Brasil, a estrada era uma forma de ocupar o território.", "checks": ["Disse que as estradas orientavam a ocupação/os migrantes?", "Disse que elas integravam o Norte ao restante do país?"]}, {"q": "Escolha UMA das quatro estratégias desta estação e escreva um impacto positivo e um possível problema que ela traz para a região. O problema pode ser uma ideia sua.", "modelo": "Exemplo com a mineração em Carajás: o impacto positivo é a geração de emprego, renda e exportação, além da integração da região ao país. Um possível problema é o desmatamento e a poluição causados pela extração em larga escala e pelas estradas e ferrovias abertas para escoar o minério.", "checks": ["Escolhi uma estratégia e disse um impacto positivo?", "Apontei um possível problema, com uma justificativa minha?"]}]}, {"reg": "norte", "tit": "Estação 9 · Demografia e economia do Norte", "html": "\n<p>Todos aqueles projetos intensificaram os <b>movimentos migratórios</b>. Entre as décadas\nde <b>1960 e 1970</b> vieram principalmente <b>nordestinos e sulistas</b>. Já entre\n<b>1970 e 1980</b>, o fluxo de migrantes vindos do Nordeste <b>diminuiu</b> e cresceu o\nfluxo vindo do <b>Sudeste</b>.</p>\n<p>Parte desses migrantes buscava terra para atividades agropecuárias; também cresceram as\natividades urbanas e industriais. Hoje a <b>maior parte da população da região mora em áreas\nurbanas</b>, porque as cidades oferecem mais infraestrutura e oportunidades de renda do que\nas pequenas comunidades dispersas.</p>\n<p>Os números de 2000 a 2022 mostram o ritmo: o estado com a <b>maior taxa de crescimento\ndemográfico</b> foi <b>Roraima (96,27%)</b>, seguido de Amapá (53,82%) e Acre (48,88%); o\nmenor foi Rondônia (14,60%). Mas o estado que <b>concentra mais gente</b> é o <b>Pará</b>,\ncom <b>8 120 131 habitantes</b> em 2022. Atenção à pegadinha: crescer rápido não é o mesmo\nque ter mais gente.</p>\n<p>A região tem a <b>menor densidade demográfica</b> do Brasil, cerca de\n<b>4,51 hab/km²</b>, com grandes <b>vazios demográficos</b> nas áreas de floresta — e, ao\nmesmo tempo, aglomerações como Belém, que chega a 1 230 hab/km². A <b>pirâmide etária</b> de\n2022 tem <b>base larga</b> (elevada taxa de natalidade), <b>meio largo</b> (muita gente\neconomicamente ativa) e <b>topo estreito</b>, porque a mortalidade é mais alta e a\nexpectativa de vida, menor. Há ainda os <b>movimentos fronteiriços</b>: pessoas que vêm da\nVenezuela, Colômbia e Peru; os municípios que mais receberam pedidos de refúgio em 2022\nforam <b>Paracaima (RR)</b>, com cerca de 14 mil, <b>Boa Vista (RR)</b>, com 10 mil, e\n<b>Manaus (AM)</b>, com 6 mil.</p>\n<p>A <b>economia</b> do Norte é baseada em atividades industriais e, principalmente, no\n<b>extrativismo vegetal e mineral</b>. Na agricultura, destaca-se a produção de gêneros\nalimentícios (<b>mandioca, arroz, feijão e milho</b>), cultivados com técnicas tradicionais,\nem pequenas propriedades, como meio de <b>subsistência</b>. São também produtos da Amazônia:\no <b>café e o cacau, em Rondônia</b>; a <b>cana-de-açúcar, no Amazonas</b>; a\n<b>pimenta-do-reino e a laranja, no Pará</b>; e a <b>banana, no Amazonas e no Pará</b>. Em\nRondônia, Pará e Tocantins a agricultura é altamente produtiva e mecanizada, voltada para a\nexportação de <b>grãos</b>, e a pecuária é <b>extensiva</b>, em grandes propriedades. No\ncomércio e serviços destacam-se os <b>transportes</b> (rodoviário, ferroviário, aeroviário e\nhidroviário) e o <b>turismo ligado à Floresta Amazônica</b>.</p>\n", "puro": "Todos aqueles projetos intensificaram os movimentos migratórios . Entre as décadas de 1960 e 1970 vieram principalmente nordestinos e sulistas . Já entre 1970 e 1980 , o fluxo de migrantes vindos do Nordeste diminuiu e cresceu o fluxo vindo do Sudeste . Parte desses migrantes buscava terra para atividades agropecuárias; também cresceram as atividades urbanas e industriais. Hoje a maior parte da população da região mora em áreas urbanas , porque as cidades oferecem mais infraestrutura e oportunidades de renda do que as pequenas comunidades dispersas. Os números de 2000 a 2022 mostram o ritmo: o estado com a maior taxa de crescimento demográfico foi Roraima (96,27%) , seguido de Amapá (53,82%) e Acre (48,88%); o menor foi Rondônia (14,60%). Mas o estado que concentra mais gente é o Pará , com 8 120 131 habitantes em 2022. Atenção à pegadinha: crescer rápido não é o mesmo que ter mais gente. A região tem a menor densidade demográfica do Brasil, cerca de 4,51 hab/km² , com grandes vazios demográficos nas áreas de floresta — e, ao mesmo tempo, aglomerações como Belém, que chega a 1 230 hab/km². A pirâmide etária de 2022 tem base larga (elevada taxa de natalidade), meio largo (muita gente economicamente ativa) e topo estreito , porque a mortalidade é mais alta e a expectativa de vida, menor. Há ainda os movimentos fronteiriços : pessoas que vêm da Venezuela, Colômbia e Peru; os municípios que mais receberam pedidos de refúgio em 2022 foram Paracaima (RR) , com cerca de 14 mil, Boa Vista (RR) , com 10 mil, e Manaus (AM) , com 6 mil. A economia do Norte é baseada em atividades industriais e, principalmente, no extrativismo vegetal e mineral . Na agricultura, destaca-se a produção de gêneros alimentícios ( mandioca, arroz, feijão e milho ), cultivados com técnicas tradicionais, em pequenas propriedades, como meio de subsistência . São também produtos da Amazônia: o café e o cacau, em Rondônia ; a cana-de-açúcar, no Amazonas ; a pimenta-do-reino e a laranja, no Pará ; e a banana, no Amazonas e no Pará . Em Rondônia, Pará e Tocantins a agricultura é altamente produtiva e mecanizada, voltada para a exportação de grãos , e a pecuária é extensiva , em grandes propriedades. No comércio e serviços destacam-se os transportes (rodoviário, ferroviário, aeroviário e hidroviário) e o turismo ligado à Floresta Amazônica .", "perg": [{"q": "Roraima teve a maior taxa de crescimento demográfico e o Pará tem a maior população. Explique, com as suas palavras, por que essas duas coisas não se contradizem.", "modelo": "Taxa de crescimento mede o quanto a população aumentou em relação ao que ela já era. Roraima tinha pouca gente, então qualquer aumento vira uma porcentagem alta. O Pará já tinha muita gente, então mesmo crescendo menos em porcentagem continua sendo o estado com mais habitantes.", "checks": ["Expliquei que a taxa é proporcional ao tamanho anterior da população?", "Deixei claro que número absoluto e porcentagem são medidas diferentes?"]}, {"q": "Olhando a pirâmide etária do Norte (base larga, meio largo, topo estreito), escreva o que cada parte revela sobre a população.", "modelo": "A base larga mostra uma taxa de natalidade elevada, ou seja, muitas crianças nascendo. O meio largo mostra que há muita gente em idade economicamente ativa. O topo estreito indica mortalidade mais alta e menor expectativa de vida, por isso poucos idosos.", "checks": ["Liguei a base larga à alta natalidade?", "Liguei o meio largo à população economicamente ativa?", "Liguei o topo estreito à mortalidade/expectativa de vida?"]}, {"q": "Monte uma frase de prova que relacione a economia do Norte a um dos estados citados, sem copiar a lista do texto.", "modelo": "Exemplo: “Em Rondônia o cultivo de café e cacau divide espaço com uma agricultura mecanizada voltada à exportação de grãos.” A frase usa um estado e liga a produção agrícola ao perfil econômico da região.", "checks": ["Minha frase cita um estado e um produto corretos?", "Escrevi a frase com as minhas palavras, sem copiar a lista?"]}]}, {"reg": "nordeste", "tit": "Estação 10 · O Nordeste: território, gente e colonização", "html": "\n<p>Agora mudamos de bioma e de ritmo. A região <b>Nordeste</b> é a <b>terceira mais extensa</b>\ndo Brasil e corresponde a <b>18% do território</b> nacional, com mais de\n<b>1,5 milhão de km²</b>. É formada por <b>nove estados</b>: Maranhão, Piauí, Ceará, Rio\nGrande do Norte, Paraíba, Pernambuco, Alagoas, Sergipe e Bahia. Segundo o Censo de 2022, sua\npopulação é de <b>54 658 515 habitantes</b> — é a <b>segunda região mais populosa</b> do\npaís, com 27,0% da população brasileira, atrás apenas do Sudeste.</p>\n<p>O Nordeste se divide em <b>quatro sub-regiões</b>: <b>Zona da Mata</b>, <b>Agreste</b>,\n<b>Sertão</b> e <b>Meio-Norte</b>. E se destaca por sua ampla <b>faixa litorânea</b> ao longo\ndo Oceano Atlântico.</p>\n<p>O povoamento começa cedo: os portugueses chegaram ao Nordeste em <b>22 de abril de\n1500</b>, com a expedição liderada por <b>Pedro Álvares Cabral</b>. O desembarque foi na\nBahia, num lugar chamado <b>Porto Seguro</b>, atualmente o município de <b>Santa Cruz\nCabrália</b>. No <b>século XVI</b> veio a exploração do <b>pau-brasil</b>.</p>\n<p>Do século XVI ao XVIII, a marca foi a <b>cana-de-açúcar</b>, cultivada no <b>litoral</b>,\nem grandes <b>plantations</b> e com <b>mão de obra escravizada</b>. A produção de açúcar\ntornou o Nordeste extremamente lucrativo para os portugueses. Depois, com o surgimento do\ncafé e das indústrias, o <b>Sudeste</b> foi ganhando importância. No <b>século XVII</b>, a\n<b>pecuária extensiva</b> começou a <b>interiorização</b> da região, chegando à área do\n<b>Vale do Rio São Francisco</b>: o gado servia para fornecer alimentos, transporte e força\nde tração nos engenhos.</p>\n<p>A <b>formação do povo nordestino</b> junta três origens: <b>indígenas</b> (os primeiros\nhabitantes), <b>africanos</b> (muitos escravizados, trazidos para as lavouras de cana) e\n<b>europeus</b> (portugueses colonizadores e holandeses que invadiram a região). Um estudo da\nUniversidade Federal do Ceará aponta que mais de <b>56%</b> do material genético nordestino é\nde origem <b>portuguesa e holandesa</b>, cerca de <b>23%</b> é <b>africana</b> e cerca de\n<b>20%</b> é <b>indígena</b>. Hoje, o Nordeste é a <b>segunda região com maior número de\nindígenas</b> (cerca de 529,1 mil, aproximadamente 31% da população indígena brasileira) e a\nque concentra a <b>maior população quilombola</b>, com cerca de <b>906 mil</b> pessoas.</p>\n", "puro": "Agora mudamos de bioma e de ritmo. A região Nordeste é a terceira mais extensa do Brasil e corresponde a 18% do território nacional, com mais de 1,5 milhão de km² . É formada por nove estados : Maranhão, Piauí, Ceará, Rio Grande do Norte, Paraíba, Pernambuco, Alagoas, Sergipe e Bahia. Segundo o Censo de 2022, sua população é de 54 658 515 habitantes — é a segunda região mais populosa do país, com 27,0% da população brasileira, atrás apenas do Sudeste. O Nordeste se divide em quatro sub-regiões : Zona da Mata , Agreste , Sertão e Meio-Norte . E se destaca por sua ampla faixa litorânea ao longo do Oceano Atlântico. O povoamento começa cedo: os portugueses chegaram ao Nordeste em 22 de abril de 1500 , com a expedição liderada por Pedro Álvares Cabral . O desembarque foi na Bahia, num lugar chamado Porto Seguro , atualmente o município de Santa Cruz Cabrália . No século XVI veio a exploração do pau-brasil . Do século XVI ao XVIII, a marca foi a cana-de-açúcar , cultivada no litoral , em grandes plantations e com mão de obra escravizada . A produção de açúcar tornou o Nordeste extremamente lucrativo para os portugueses. Depois, com o surgimento do café e das indústrias, o Sudeste foi ganhando importância. No século XVII , a pecuária extensiva começou a interiorização da região, chegando à área do Vale do Rio São Francisco : o gado servia para fornecer alimentos, transporte e força de tração nos engenhos. A formação do povo nordestino junta três origens: indígenas (os primeiros habitantes), africanos (muitos escravizados, trazidos para as lavouras de cana) e europeus (portugueses colonizadores e holandeses que invadiram a região). Um estudo da Universidade Federal do Ceará aponta que mais de 56% do material genético nordestino é de origem portuguesa e holandesa , cerca de 23% é africana e cerca de 20% é indígena . Hoje, o Nordeste é a segunda região com maior número de indígenas (cerca de 529,1 mil, aproximadamente 31% da população indígena brasileira) e a que concentra a maior população quilombola , com cerca de 906 mil pessoas.", "perg": [{"q": "Explique com as suas palavras por que o litoral foi ocupado primeiro que o interior do Nordeste, e o que mudou isso no século XVII.", "modelo": "O litoral foi ocupado primeiro porque ali se plantava a cana-de-açúcar nas grandes plantations, que era o negócio mais lucrativo para os portugueses e ficava perto dos portos de exportação. No século XVII a pecuária extensiva começou a levar gente para dentro, iniciando a interiorização até o Vale do Rio São Francisco.", "checks": ["Liguei o litoral à cana-de-açúcar e às plantations?", "Disse que a pecuária extensiva iniciou a interiorização no século XVII?"]}, {"q": "Escreva uma frase que compare a formação do povo nordestino com a do povo da região Norte, usando o que você leu nas duas partes do kit.", "modelo": "No Norte a base é fortemente indígena, com a maior concentração de população autodeclarada indígena do país e forte presença de povos originários nas áreas de floresta; no Nordeste a formação junta indígenas, africanos trazidos para a cana e europeus portugueses e holandeses, e a região concentra a maior população quilombola do Brasil.", "checks": ["Falei da forte presença indígena no Norte?", "Falei das três origens do povo nordestino (indígena, africana, europeia)?"]}, {"q": "Um colega diz: “o Nordeste é a maior região do Brasil e a mais populosa”. Aponte o que está errado e escreva a versão correta.", "modelo": "As duas partes estão erradas. O Nordeste é a terceira região mais extensa, com 18% do território (a maior é o Norte), e é a segunda mais populosa, com 54 658 515 habitantes — quem tem mais gente é o Sudeste.", "checks": ["Corrigi para terceira em extensão (18% do território)?", "Corrigi para segunda em população, atrás do Sudeste?"]}]}, {"reg": "nordeste", "tit": "Estação 11 · População, densidade e as migrações nordestinas", "html": "\n<p>A população nordestina <b>continua crescendo, mas em ritmo mais lento</b> que no passado.\nO motivo é a <b>redução da taxa de fecundidade</b>, que acontece em todo o país. Três razões\naparecem no livro: <b>maior presença das mulheres no mercado de trabalho</b>,\n<b>urbanização</b> e <b>planejamento familiar</b>.</p>\n<p>Duas palavras parecidas confundem muita gente na prova. <b>Populoso</b> é o\n<b>número total de pessoas</b> que vivem num lugar. <b>Povoado</b> é o número de\n<b>habitantes por km²</b>, ou seja, a densidade — um lugar é bem povoado quando a população\nestá bem distribuída pelo território.</p>\n<p>No Nordeste, a população <b>não está distribuída de forma regular</b>: ela se concentra no\n<b>litoral</b>. Quatro fatores explicam isso: a <b>colonização</b> (que começou no litoral), a\nárea que <b>se industrializou primeiro</b>, o <b>turismo</b> e a <b>seca no interior</b>.</p>\n<p>As condições de vida melhoraram ao longo dos anos, principalmente com as políticas de\n<b>transferência de renda</b> a partir da <b>década de 1990</b>, que elevaram as taxas de\nescolarização e a <b>expectativa de vida</b> — vários estados da região já passam dos\n<b>73 anos</b>. Isso aparece na pirâmide etária: comparando 2010 com 2022, houve\n<b>alargamento do corpo da pirâmide</b>, o que sugere aumento da proporção de adultos, e uma\npresença maior de idosos. Esse fenômeno resulta da queda das taxas de <b>fecundidade e\nmortalidade</b> junto com as variações no <b>saldo migratório</b>.</p>\n<p>E as migrações? De <b>1930 até meados de 1990</b>, muitos nordestinos saíram da região.\nPara o <b>Sudeste, a partir de 1930</b>, por causa da industrialização de São Paulo, da seca\nnordestina e da falta de emprego na região. Para o <b>Centro-Oeste, a partir de 1950</b>, por\ncausa da <b>construção de Brasília</b>. Para o <b>Norte, a partir de 1950</b>, por causa da\n<b>política de colonização amazônica</b>.</p>\n<p>A partir da <b>década de 1990</b> aparece a <b>migração de retorno</b>: nordestinos\nvoltando para casa. Isso foi influenciado pelo crescimento econômico da região, pelo\n<b>aumento do custo de vida</b> e pelo <b>desemprego no Sudeste</b>. Cresceu também a\n<b>migração intrarregional</b>, principalmente em direção às <b>cidades médias</b>. Outro\nmotor do crescimento foi a <b>Guerra Fiscal</b>: a disputa entre os estados para atrair\nindústrias oferecendo <b>isenção fiscal</b>, mão de obra mais barata, investimentos em\ninfraestrutura (portos, ferrovias e aeroportos) e doação de terrenos.</p>\n", "puro": "A população nordestina continua crescendo, mas em ritmo mais lento que no passado. O motivo é a redução da taxa de fecundidade , que acontece em todo o país. Três razões aparecem no livro: maior presença das mulheres no mercado de trabalho , urbanização e planejamento familiar . Duas palavras parecidas confundem muita gente na prova. Populoso é o número total de pessoas que vivem num lugar. Povoado é o número de habitantes por km² , ou seja, a densidade — um lugar é bem povoado quando a população está bem distribuída pelo território. No Nordeste, a população não está distribuída de forma regular : ela se concentra no litoral . Quatro fatores explicam isso: a colonização (que começou no litoral), a área que se industrializou primeiro , o turismo e a seca no interior . As condições de vida melhoraram ao longo dos anos, principalmente com as políticas de transferência de renda a partir da década de 1990 , que elevaram as taxas de escolarização e a expectativa de vida — vários estados da região já passam dos 73 anos . Isso aparece na pirâmide etária: comparando 2010 com 2022, houve alargamento do corpo da pirâmide , o que sugere aumento da proporção de adultos, e uma presença maior de idosos. Esse fenômeno resulta da queda das taxas de fecundidade e mortalidade junto com as variações no saldo migratório . E as migrações? De 1930 até meados de 1990 , muitos nordestinos saíram da região. Para o Sudeste, a partir de 1930 , por causa da industrialização de São Paulo, da seca nordestina e da falta de emprego na região. Para o Centro-Oeste, a partir de 1950 , por causa da construção de Brasília . Para o Norte, a partir de 1950 , por causa da política de colonização amazônica . A partir da década de 1990 aparece a migração de retorno : nordestinos voltando para casa. Isso foi influenciado pelo crescimento econômico da região, pelo aumento do custo de vida e pelo desemprego no Sudeste . Cresceu também a migração intrarregional , principalmente em direção às cidades médias . Outro motor do crescimento foi a Guerra Fiscal : a disputa entre os estados para atrair indústrias oferecendo isenção fiscal , mão de obra mais barata, investimentos em infraestrutura (portos, ferrovias e aeroportos) e doação de terrenos.", "perg": [{"q": "Explique a diferença entre “populoso” e “povoado” usando um exemplo inventado por você (que não esteja no texto).", "modelo": "Populoso é ter muita gente no total; povoado é ter muita gente por km². Exemplo: um município pequeno com 50 mil pessoas apertadas em poucos quilômetros quadrados é bem povoado, mas não é populoso; já um estado enorme com 5 milhões de pessoas espalhadas é populoso, mas pouco povoado.", "checks": ["Defini populoso como número total de pessoas?", "Defini povoado como habitantes por km² (densidade)?", "Criei um exemplo próprio, que não está no texto?"]}, {"q": "Escreva a diferença entre a migração nordestina dos anos 1930-1980 e a migração de retorno dos anos 1990 em diante, com as suas palavras.", "modelo": "De 1930 até os anos 1980 os nordestinos saíam da região atrás de emprego e melhores condições de vida, indo para o Sudeste por causa da industrialização, para o Centro-Oeste por causa de Brasília e para o Norte por causa da colonização amazônica. A partir dos anos 1990 muita gente começou a voltar, porque o Nordeste passou a crescer e o Sudeste ficou caro e com desemprego.", "checks": ["Expliquei que na primeira fase a saída era por emprego e melhores condições?", "Expliquei o retorno pelo crescimento do Nordeste e pelo custo de vida/desemprego no Sudeste?"]}, {"q": "Imagine que você é prefeito de uma cidade média do Nordeste e quer atrair uma fábrica. Escreva duas ofertas que você faria, usando a ideia de Guerra Fiscal.", "modelo": "Eu ofereceria isenção de impostos por alguns anos e a doação de um terreno com infraestrutura pronta, perto de um porto ou aeroporto. São exatamente as armas da Guerra Fiscal: reduzir custos e melhorar a infraestrutura para a indústria escolher a minha cidade.", "checks": ["Citei isenção fiscal / redução de impostos?", "Citei outra oferta típica da Guerra Fiscal (terreno, infraestrutura, mão de obra)?"]}]}, {"reg": "nordeste", "tit": "Estação 12 · Relevo e vegetações do Nordeste", "html": "\n<p>O relevo do Nordeste tem <b>grande variação</b>. Ele é marcado por regiões de\n<b>planaltos</b>, <b>depressões</b> e <b>planícies costeiras</b>. Duas palavras novas\naparecem aqui e caem muito em prova: <b>escudo cristalino</b> e <b>bacia sedimentar</b>, que\nsão <b>estruturas geológicas</b> — isto é, as rochas que compõem cada forma de relevo. As\nregiões de escudo cristalino são as <b>mais antigas</b> e formadas principalmente por\n<b>rochas magmáticas</b>. Já as bacias sedimentares têm muita sedimentação e são formadas por\n<b>rochas sedimentares</b>.</p>\n<p>Na <b>divisa oeste</b> da região estão as <b>altitudes mais elevadas</b>: os\n<b>planaltos</b>, áreas em que a <b>erosão (desgaste) é maior que a sedimentação</b>\n(acúmulo). Eles têm relevo acidentado, com partes íngremes e outras mais planas, e são de\nformação cristalina. No <b>interior</b> predominam as <b>depressões</b>, com destaque para a\n<b>depressão sertaneja</b>; as exceções são o <b>Planalto da Borborema</b> e as <b>Serras do\nAtlântico Leste e Sudeste</b>, na Bahia. No <b>litoral</b> predominam as <b>planícies</b>,\nonde a <b>sedimentação é maior que a erosão</b>: são áreas planas formadas por\n<b>bacias sedimentares</b>.</p>\n<p>O perfil topográfico mostra ainda três nomes importantes: os <b>planaltos e chapadas da\nbacia do Parnaíba</b>, região de <b>cuestas</b> (forma de relevo com declividade brusca de um\nlado e mais suave do outro, com planaltos de topos planos); a <b>depressão sertaneja</b>, área\nonde corre o <b>Rio São Francisco</b>; e os <b>tabuleiros litorâneos</b>. Detalhe decisivo:\no <b>Planalto da Borborema impede a entrada da umidade</b> vinda do Oceano Atlântico para o\ninterior da região — o vento chega úmido no litoral e passa seco para o sertão.\nCuriosidade do livro: no passado o Nordeste teve <b>vulcões ativos</b>, como o\n<b>Pico do Cabugi</b>, um vulcão extinto no município de Angicos (RN).</p>\n<p>E as <b>vegetações</b>? Como o clima manda na vegetação, e o clima do Nordeste não é igual\nem toda parte, a região reúne vários tipos. A <b>Caatinga</b> é a vegetação adaptada ao\n<b>clima semiárido</b>, com escassez de chuvas, e apresenta <b>plantas xerófilas</b>, que\n<b>armazenam água</b> nos períodos chuvosos. A <b>Mata Atlântica</b> aparece no litoral: é\numa vegetação <b>latifoliada</b>, floresta fechada, com árvores de grande porte. A\n<b>Floresta Amazônica</b> entra pelo oeste do Maranhão, densa, de grande biodiversidade,\nlatifoliada e de grande porte. O <b>Cerrado</b> tem plantas de <b>raízes profundas</b>,\ngalhos retorcidos e árvores espaçadas. A <b>vegetação litorânea</b> tem plantas com\n<b>raízes aéreas</b>, em ambiente rico em nutrientes. E há duas <b>áreas de transição</b>\nentre biomas: a <b>Área de Transição I</b>, onde fica a <b>Mata dos Cocais</b>, com presença\ndo <b>babaçu e da carnaúba</b>, e a <b>Área de Transição II</b>, também chamada de\n<b>ecótono</b>.</p>\n", "puro": "O relevo do Nordeste tem grande variação . Ele é marcado por regiões de planaltos , depressões e planícies costeiras . Duas palavras novas aparecem aqui e caem muito em prova: escudo cristalino e bacia sedimentar , que são estruturas geológicas — isto é, as rochas que compõem cada forma de relevo. As regiões de escudo cristalino são as mais antigas e formadas principalmente por rochas magmáticas . Já as bacias sedimentares têm muita sedimentação e são formadas por rochas sedimentares . Na divisa oeste da região estão as altitudes mais elevadas : os planaltos , áreas em que a erosão (desgaste) é maior que a sedimentação (acúmulo). Eles têm relevo acidentado, com partes íngremes e outras mais planas, e são de formação cristalina. No interior predominam as depressões , com destaque para a depressão sertaneja ; as exceções são o Planalto da Borborema e as Serras do Atlântico Leste e Sudeste , na Bahia. No litoral predominam as planícies , onde a sedimentação é maior que a erosão : são áreas planas formadas por bacias sedimentares . O perfil topográfico mostra ainda três nomes importantes: os planaltos e chapadas da bacia do Parnaíba , região de cuestas (forma de relevo com declividade brusca de um lado e mais suave do outro, com planaltos de topos planos); a depressão sertaneja , área onde corre o Rio São Francisco ; e os tabuleiros litorâneos . Detalhe decisivo: o Planalto da Borborema impede a entrada da umidade vinda do Oceano Atlântico para o interior da região — o vento chega úmido no litoral e passa seco para o sertão. Curiosidade do livro: no passado o Nordeste teve vulcões ativos , como o Pico do Cabugi , um vulcão extinto no município de Angicos (RN). E as vegetações ? Como o clima manda na vegetação, e o clima do Nordeste não é igual em toda parte, a região reúne vários tipos. A Caatinga é a vegetação adaptada ao clima semiárido , com escassez de chuvas, e apresenta plantas xerófilas , que armazenam água nos períodos chuvosos. A Mata Atlântica aparece no litoral: é uma vegetação latifoliada , floresta fechada, com árvores de grande porte. A Floresta Amazônica entra pelo oeste do Maranhão, densa, de grande biodiversidade, latifoliada e de grande porte. O Cerrado tem plantas de raízes profundas , galhos retorcidos e árvores espaçadas. A vegetação litorânea tem plantas com raízes aéreas , em ambiente rico em nutrientes. E há duas áreas de transição entre biomas: a Área de Transição I , onde fica a Mata dos Cocais , com presença do babaçu e da carnaúba , e a Área de Transição II , também chamada de ecótono .", "perg": [{"q": "Explique com as suas palavras por que o sertão recebe pouca umidade, citando o relevo responsável.", "modelo": "Porque o Planalto da Borborema funciona como uma barreira: o vento úmido que vem do Oceano Atlântico bate nele e descarrega a chuva do lado do litoral, chegando seco ao interior. Por isso a umidade não entra no sertão.", "checks": ["Citei o Planalto da Borborema?", "Expliquei que ele barra a umidade vinda do Oceano Atlântico?"]}, {"q": "Você recebe a foto de uma planta com caule grosso que guarda água e folhas pequenas, numa área com poucos meses de chuva. Diga qual vegetação é essa, qual é o clima e justifique pelo que a planta mostra.", "modelo": "É a Caatinga, típica do clima semiárido. A justificativa está na planta: ela é xerófila, ou seja, adaptada à falta de água, e armazena a água que consegue nos períodos chuvosos para atravessar a estiagem.", "checks": ["Identifiquei a Caatinga e o clima semiárido?", "Usei a característica xerófila / armazenamento de água como justificativa?"]}, {"q": "Escreva com as suas palavras a diferença entre escudo cristalino e bacia sedimentar, e diga onde cada um predomina no Nordeste.", "modelo": "Escudo cristalino é formado por rochas antigas, principalmente magmáticas, e aparece nos planaltos da divisa oeste e nas áreas mais altas do interior. Bacia sedimentar é formada por rochas sedimentares, com muito acúmulo de sedimentos, e predomina nas planícies do litoral, onde a sedimentação é maior que a erosão.", "checks": ["Liguei o escudo cristalino a rochas antigas/magmáticas e às áreas mais altas?", "Liguei a bacia sedimentar às rochas sedimentares e às planícies do litoral?"]}]}], "pegadinhas": ["Acre ≠ Tocantins: o Acre foi ANEXADO em 1903 (Tratado de Petrópolis); o Tocantins foi CRIADO em 1988, a partir de Goiás.", "Amazonas e Pará são os mais EXTENSOS do Norte; o Pará é o mais POPULOSO. Roraima é o que mais CRESCEU (96,27%), mas tem pouca gente.", "mEc é continental (nasce sobre a floresta); mEa é atlântica (nasce sobre o oceano). As duas são quentes e úmidas — a diferença é a ORIGEM.", "Friagem é queda brusca de temperatura na Amazônia causada pela massa POLAR atlântica (mPa), no inverno — não é a mEc.", "Superúmido = SEM estação seca (oeste/Acre). Equatorial úmido = curta seca. Tropical semiúmido = verão chuvoso e inverno seco (leste de RR e TO).", "Terra firme ≈ 80% e NÃO alaga. Várzea alaga e ganha sedimentos (solo rico). Igapó fica alagado mais tempo, com raízes aéreas e vitória-régia.", "O Rio Amazonas NASCE nos Andes peruanos e só recebe esse nome após o encontro do Negro com o Solimões. Regime MISTO (nival + pluvial).", "Amazônia Legal ≠ região Norte: ela inclui também o Mato Grosso e a porção ocidental do Maranhão. O órgão é a SUDAM.", "Zona Franca de Manaus: criada em 1967, foco em ELETRÔNICOS. Carajás (PGC) é MINERAÇÃO, no Pará, e fez do estado um grande exportador de ferro.", "No Nordeste: POPULOSO é o total de pessoas; POVOADO é habitantes por km². E quem barra a umidade do sertão é o Planalto da BORBOREMA."], "cobertura": [["Aspectos gerais da região Norte (p. 8 a 14)", "Estações 1, 2, 3, 4 e 5"], ["Relevo e hidrografia do Norte (p. 16 a 19)", "Estação 6"], ["População e povoamento do Norte (p. 21 a 23)", "Estação 7"], ["Estratégias de integração (p. 24 e 25)", "Estação 8"], ["Aspectos demográficos do Norte (p. 26 a 28)", "Estação 9"], ["Economia do Norte (p. 29 e 30)", "Estação 9"], ["Aspectos gerais da região Nordeste (p. 46 e 47)", "Estação 10"], ["População e povoamento do Nordeste (p. 47 a 52)", "Estações 10 e 11"], ["Relevo do Nordeste (p. 53 a 55)", "Estação 12"], ["Vegetações do Nordeste brasileiro (p. 61)", "Estação 12"]]};
+var E = {blocos:{}};
+
+function est(i){
+  if(!E.blocos[i]) E.blocos[i] = {resp:['','',''], transcrita:[false,false,false],
+    tentou:[null,null,null], chk:[[],[],[]], feito:false, quando:null};
+  var s = E.blocos[i];
+  s.resp = s.resp || ['','','']; s.transcrita = s.transcrita || [false,false,false];
+  s.tentou = s.tentou || [null,null,null]; s.chk = s.chk || [[],[],[]];
+  return s;
+}
+function blocoLiberado(i){ return i === 0 || est(i-1).feito; }
+
+function montar(){
+  var cx = document.getElementById('lista-blocos');
+  cx.innerHTML = '';
+  D.blocos.forEach(function(b,i){
+    var lib = blocoLiberado(i), s = est(i);
+    var d = document.createElement('section');
+    d.className = 'bloco' + (b.reg === 'nordeste' ? ' nord' : '') + (lib ? '' : ' trancado');
+    d.id = 'bloco'+i;
+    var cabeca = '<div class="cab"><h3><span class="num">'+(i+1)+'</span>'+esc(b.tit)+'</h3>'+
+                 '<span class="status">em aberto</span></div>';
+    if(!lib){
+      d.innerHTML = cabeca + '<div class="corpo"><p class="pequeno">🔒 Estação bloqueada. '+
+        'Conclua a estação '+i+' para destravar.</p></div>';
+      cx.appendChild(d); return;
+    }
+    d.innerHTML = cabeca + '<div class="corpo">' + b.html +
+      '<div id="pcx'+i+'"></div>' +
+      '<button class="btn btn-1" id="conf'+i+'">✅ Conferir esta estação</button></div>';
+    cx.appendChild(d);
+    montarPerg(i);
+    pintarStatus(i);
+  });
+  pintarProgresso();
+}
+
+function montarPerg(i){
+  var b = D.blocos[i], s = est(i), cx = document.getElementById('pcx'+i);
+  cx.innerHTML = '';
+  b.perg.forEach(function(p,j){
+    var d = document.createElement('div');
+    d.className = 'perg' + (s.transcrita[j] ? ' vermelha' : '');
+    d.id = 'p'+i+'_'+j;
+    d.innerHTML = '<div class="enun">'+(j+1)+'. '+p.q+'</div>'+
+      '<textarea rows="4" id="t'+i+'_'+j+'" placeholder="Escreva aqui com as suas palavras...">'+esc(s.resp[j]||'')+'</textarea>'+
+      '<div id="av'+i+'_'+j+'"></div>';
+    cx.appendChild(d);
+    var ta = document.getElementById('t'+i+'_'+j);
+    ta.oninput = function(){
+      s.resp[j] = ta.value;
+      if(s.transcrita[j] && s.tentou[j] && !Anticopia.ehCopia(ta.value, b.puro, p.q)){
+        s.transcrita[j] = false;
+        document.getElementById('p'+i+'_'+j).classList.remove('vermelha');
+        document.getElementById('av'+i+'_'+j).innerHTML =
+          '<div class="modelo">✅ Agora está com as suas palavras. A marca vermelha saiu.</div>' + blocoModelo(i,j);
+        ligaChecks(i,j);
+        pintarStatus(i);
+      }
+      salvarAgora();
+    };
+    if(s.feito) mostrarConferido(i,j,!!s.transcrita[j]);
+  });
+  document.getElementById('conf'+i).onclick = function(){ conferir(i); };
+}
+
+function blocoModelo(i,j){
+  var p = D.blocos[i].perg[j], s = est(i);
+  var itens = p.checks.map(function(c,k){
+    var st = s.chk[j] && s.chk[j][k];
+    return '<div class="item"><span>'+esc(c)+'</span>'+
+      '<button class="mini'+(st==='sim'?' on-sim':'')+'" data-k="'+k+'" data-v="sim">Sim</button>'+
+      '<button class="mini'+(st==='nao'?' on-nao':'')+'" data-k="'+k+'" data-v="nao">Não</button></div>';
+  }).join('');
+  return '<div class="modelo"><b>Resposta modelo:</b> '+esc(p.modelo)+'</div>'+
+    '<div class="checklist" id="ck'+i+'_'+j+'"><b>Confira a SUA resposta:</b>'+itens+'</div>';
+}
+
+function ligaChecks(i,j){
+  var s = est(i);
+  var cx = document.getElementById('ck'+i+'_'+j);
+  if(!cx) return;
+  var bts = cx.querySelectorAll('.mini');
+  for(var n=0;n<bts.length;n++){
+    (function(bt){
+      bt.onclick = function(){
+        s.chk[j] = s.chk[j] || [];
+        s.chk[j][+bt.getAttribute('data-k')] = bt.getAttribute('data-v');
+        salvarAgora();
+        mostrarConferido(i,j,!!s.transcrita[j]);
+        pintarStatus(i);
+      };
+    })(bts[n]);
+  }
+}
+
+function mostrarConferido(i,j,vermelho){
+  var av = document.getElementById('av'+i+'_'+j);
+  if(!av) return;
+  av.innerHTML = (vermelho ? '<div class="aviso-vermelho">⚠️ Esta resposta ficou muito parecida com o texto. Ela entra na lista "para revisar". Se reescrever com as suas palavras, a marca some.</div>' : '') + blocoModelo(i,j);
+  ligaChecks(i,j);
+}
+
+function conferir(i){
+  var b = D.blocos[i], s = est(i), j;
+  var faltando = [];
+  for(j=0;j<3;j++){
+    var v = (document.getElementById('t'+i+'_'+j).value||'').trim();
+    s.resp[j] = v;
+    if(v.length < 3) faltando.push(j+1);
+  }
+  if(faltando.length){
+    modal('✍️ Falta responder', '<p>Responda as três perguntas antes de conferir. Ainda falta: <b>'+faltando.join(', ')+'</b>.</p>', [{texto:'Ok', classe:'btn-1'}]);
+    return;
+  }
+  var travou = false;
+  for(j=0;j<3;j++){
+    var p = b.perg[j];
+    var copia = Anticopia.ehCopia(s.resp[j], b.puro, p.q);
+    if(copia && !s.tentou[j]){
+      s.tentou[j] = s.resp[j];
+      travou = true;
+      document.getElementById('av'+i+'_'+j).innerHTML =
+        '<div class="aviso-copia">✋ Boa parte da sua resposta está igual ao texto. Tente reescrever com as <b>suas</b> palavras — explique como se fosse para um amigo, sem olhar o texto. Pode ficar mais curto e simples, o que vale é ser SEU.</div>';
+      document.getElementById('t'+i+'_'+j).focus();
+    } else if(copia){
+      s.transcrita[j] = true;
+    } else {
+      s.transcrita[j] = false;
+    }
+  }
+  salvarAgora();
+  if(travou){ pintarStatus(i); return; }
+  s.feito = true;
+  s.quando = new Date().toLocaleString('pt-BR');
+  for(j=0;j<3;j++){
+    document.getElementById('p'+i+'_'+j).classList.toggle('vermelha', !!s.transcrita[j]);
+    mostrarConferido(i, j, !!s.transcrita[j]);
+  }
+  salvarAgora();
+  montar();
+  var el = document.getElementById('bloco'+Math.min(i+1, D.blocos.length-1));
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function temRevisar(i){
+  var s = est(i), j, k;
+  for(j=0;j<3;j++) if(s.transcrita[j]) return true;
+  for(j=0;j<3;j++){
+    var ch = s.chk[j]||[];
+    var n = D.blocos[i].perg[j].checks.length;
+    for(k=0;k<n;k++){ if(ch[k]==='nao') return true; if(!ch[k]) return true; }
+  }
+  return false;
+}
+
+function pintarStatus(i){
+  var el = document.querySelector('#bloco'+i+' .status');
+  if(!el) return;
+  var s = est(i);
+  el.innerHTML = s.feito ? (temRevisar(i) ? '<span class="selo-rev">🔁 revisar</span>' : '<span class="selo-ok">✅ concluída</span>') : 'em aberto';
+  pintarProgresso();
+}
+
+function contarRevisar(){
+  var t = 0, i, j, k;
+  for(i=0;i<D.blocos.length;i++){
+    var s = est(i);
+    if(!s.feito) continue;
+    for(j=0;j<3;j++){
+      if(s.transcrita[j]) { t++; continue; }
+      var ch = s.chk[j]||[];
+      var n = D.blocos[i].perg[j].checks.length;
+      for(k=0;k<n;k++) if(ch[k]==='nao'){ t++; break; }
+    }
+  }
+  return t;
+}
+
+function pintarProgresso(){
+  var n = 0, verm = 0, i, j;
+  for(i=0;i<D.blocos.length;i++) if(est(i).feito) n++;
+  document.getElementById('barra-geral').style.width = (n/D.blocos.length*100)+'%';
+  document.getElementById('progresso-txt').textContent = n+' de '+D.blocos.length+' estações concluídas';
+  var fim = document.getElementById('final');
+  if(n === D.blocos.length){ fim.classList.remove('oculto'); montarFinal(); }
+  for(i=0;i<D.blocos.length;i++){ var s=est(i); if(s.feito) for(j=0;j<3;j++) if(s.transcrita[j]) verm++; }
+  Meta.set({blocosFeitos:n, totalBlocos:D.blocos.length, paraRevisar:contarRevisar(), vermelhas:verm});
+}
+
+function montarFinal(){
+  var ol = document.getElementById('lista-pegadinhas');
+  if(!ol.children.length) D.pegadinhas.forEach(function(p){ var li=document.createElement('li'); li.textContent=p; ol.appendChild(li); });
+  var tb = document.getElementById('tab-cobertura');
+  if(!tb.children.length) D.cobertura.forEach(function(c){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+esc(c[0])+'</td><td>'+esc(c[1])+'</td>'; tb.appendChild(tr); });
+  var lr = document.getElementById('lista-revisar');
+  var itens = [], i, j;
+  for(i=0;i<D.blocos.length;i++){
+    var s = est(i);
+    for(j=0;j<3;j++){
+      var motivo = [];
+      if(s.transcrita[j]) motivo.push('resposta muito parecida com o texto');
+      var ch = s.chk[j]||[];
+      D.blocos[i].perg[j].checks.forEach(function(c,k){
+        if(ch[k]==='nao') motivo.push('faltou: '+c.replace('Minha resposta disse que ','').replace('?',''));
+      });
+      if(motivo.length) itens.push('<li><b>Estação '+(i+1)+', pergunta '+(j+1)+'</b> — '+esc(motivo.join('; '))+'</li>');
+    }
+  }
+  lr.innerHTML = itens.length ? '<ol class="limpa">'+itens.join('')+'</ol>'
+    : '<p><span class="selo-ok">Tudo certo</span> Nenhuma resposta ficou copiada e todos os pontos-chave foram marcados. 🧭</p>';
+}
+
+painelSalvar(KEY, function(){ return E; },
+  function(sal){ if(sal && sal.blocos) E = sal; },
+  function(){ E = {blocos:{}}; });
+montar();
+</script>
+</body>
+</html>

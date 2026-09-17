@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expedição Dois Biomas · Geografia 7º ano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fundo:#08131b; --fundo2:#0e1e29; --painel:#122938; --painel2:#16344a;
+  --linha:#1e4257; --texto:#e6f2f3; --fraco:#9db6c2;
+  --verde:#33d9a0; --verde2:#8ff3cd; --verdeEsc:#0d3b2e;
+  --ambar:#f2a541; --ambar2:#ffd08a; --ambarEsc:#41280c;
+  --ouro:#ffd479; --vermelho:#ff6b6b; --vermelhoEsc:#3a1414;
+  --postit:#ffe082;
+  --tf:'Inter',"Segoe UI",system-ui,-apple-system,sans-serif;
+  --td:'Space Grotesk',"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(900px 420px at 12% -6%, #123b35 0%, transparent 60%),
+    radial-gradient(760px 380px at 92% 4%, #3b2a10 0%, transparent 62%),
+    var(--fundo);
+  color:var(--texto); font-family:var(--tf); font-size:17px; line-height:1.65;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 80px}
+a{color:var(--verde2)}
+h1,h2,h3,h4{font-family:var(--td);line-height:1.2;margin:0 0 10px}
+h1{font-size:30px;letter-spacing:.4px}
+h2{font-size:23px}
+h3{font-size:19px}
+.pequeno{font-size:14px;color:var(--fraco)}
+.limpa{margin:0;padding-left:20px}
+
+/* ---------- topo ---------- */
+.topo{
+  background:linear-gradient(135deg,#0c2b25 0%,#11293a 48%,#3a2a12 100%);
+  border-bottom:2px solid var(--linha); padding:26px 0 20px; margin-bottom:22px;
+}
+.topo .wrap{padding-bottom:0}
+.crachá,.cracha{display:inline-block;font-family:var(--td);font-size:12px;letter-spacing:2px;
+  text-transform:uppercase;color:#06231c;background:var(--verde);padding:4px 12px;border-radius:999px;font-weight:700}
+.cracha.amb{background:var(--ambar);color:#2a1806}
+.subtopo{color:var(--fraco);margin:6px 0 0;font-size:15px}
+
+/* ---------- abas ---------- */
+.abas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.abas a{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--td);
+  font-size:14px;color:var(--texto);background:var(--painel);border:1px solid var(--linha);
+  padding:8px 13px;border-radius:999px;
+}
+.abas a.ativa{background:var(--verde);color:#062018;border-color:var(--verde);font-weight:700}
+.abas a:hover{border-color:var(--verde)}
+
+/* ---------- caixas ---------- */
+.card{background:var(--painel);border:1px solid var(--linha);border-radius:16px;padding:20px;margin:16px 0}
+.card.verde{border-left:5px solid var(--verde)}
+.card.amb{border-left:5px solid var(--ambar)}
+.postit{
+  background:var(--postit);color:#3c2d00;border-radius:4px;padding:14px 16px;margin:14px 0;
+  box-shadow:4px 4px 0 rgba(0,0,0,.35); transform:rotate(-.5deg); font-size:16px;
+}
+.postit b{color:#7a5a00}
+.pegadinha{background:var(--vermelhoEsc);border:1px solid #6b2626;border-left:5px solid var(--vermelho);
+  border-radius:12px;padding:14px 16px;margin:14px 0}
+.pegadinha b{color:#ff9b9b}
+.narrador{border-left:3px dashed var(--ambar);padding:6px 0 6px 14px;color:var(--ambar2);
+  font-style:italic;margin:14px 0;font-size:15.5px}
+.aviso-vermelho{background:var(--vermelhoEsc);border:1px solid #7a2a2a;color:#ffc9c9;
+  padding:10px 12px;border-radius:10px;margin:8px 0;font-size:15px}
+.aviso-copia{background:#3d3208;border:1px solid #8a7420;color:#ffe9a8;
+  padding:10px 12px;border-radius:10px;margin:8px 0;font-size:15px}
+
+/* ---------- botões ---------- */
+.btn{font-family:var(--td);font-size:15px;border:0;border-radius:999px;padding:10px 18px;cursor:pointer}
+.btn-1{background:var(--verde);color:#062018;font-weight:700}
+.btn-2{background:var(--painel2);color:var(--texto);border:1px solid var(--linha)}
+.btn-3{background:var(--ambar);color:#2a1806;font-weight:700}
+.btn-v{background:#c0392b;color:#fff;font-weight:700}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-grande{font-size:18px;padding:13px 26px}
+
+/* ---------- painel de salvamento ---------- */
+.salvar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;
+  background:var(--fundo2);border:1px solid var(--linha);border-radius:14px;padding:12px 14px;margin:16px 0}
+.salvar .bts{display:flex;gap:8px;flex-wrap:wrap}
+.salvar .bts .btn{font-size:13.5px;padding:7px 13px}
+textarea{width:100%;background:#0a1c26;color:var(--texto);border:1px solid var(--linha);
+  border-radius:10px;padding:10px;font-family:var(--tf);font-size:16px;resize:vertical}
+input[type=text]{background:#0a1c26;color:var(--texto);border:1px solid var(--linha);
+  border-radius:10px;padding:9px 12px;font-family:var(--td);font-size:16px}
+
+/* ---------- progresso ---------- */
+.prog{background:#0a1c26;border:1px solid var(--linha);border-radius:999px;height:12px;overflow:hidden;margin:8px 0}
+.prog > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--ambar));transition:width .4s}
+
+/* ---------- blocos da leitura ---------- */
+.bloco{background:var(--painel);border:1px solid var(--linha);border-radius:16px;margin:18px 0;overflow:hidden}
+.bloco.trancado{opacity:.5}
+.bloco .cab{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+  padding:14px 18px;background:var(--painel2);border-bottom:1px solid var(--linha)}
+.bloco .cab h3{margin:0}
+.bloco .corpo{padding:18px}
+.num{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--verde);color:#062018;
+  align-items:center;justify-content:center;font-family:var(--td);font-weight:700;margin-right:8px}
+.bloco.nord .num{background:var(--ambar);color:#2a1806}
+.status{font-size:13px;color:var(--fraco);font-family:var(--td)}
+.selo-ok{color:#062018;background:var(--verde);padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+.selo-rev{color:#2a1806;background:var(--ambar);padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+.perg{background:var(--fundo2);border:1px solid var(--linha);border-radius:12px;padding:14px;margin:12px 0}
+.perg.vermelha{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho) inset}
+.enun{font-weight:600;margin-bottom:8px}
+.modelo{background:var(--verdeEsc);border:1px solid #1d6b52;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:15.5px}
+.checklist{background:#0a1c26;border:1px solid var(--linha);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:15px}
+.checklist .item{display:flex;gap:8px;align-items:center;justify-content:space-between;
+  padding:6px 0;border-bottom:1px dashed #1b3a4c}
+.checklist .item:last-child{border-bottom:0}
+.checklist .item span{flex:1}
+.mini{font-family:var(--td);font-size:13px;border:1px solid var(--linha);background:var(--painel2);
+  color:var(--texto);border-radius:999px;padding:4px 12px;cursor:pointer}
+.mini.on-sim{background:var(--verde);color:#062018;border-color:var(--verde);font-weight:700}
+.mini.on-nao{background:var(--ambar);color:#2a1806;border-color:var(--ambar);font-weight:700}
+
+/* ---------- tabelas ---------- */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+th,td{border:1px solid var(--linha);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--painel2);font-family:var(--td);font-size:14.5px}
+
+/* ---------- quiz / simulado ---------- */
+.q{background:var(--painel);border:1px solid var(--linha);border-radius:14px;padding:16px;margin:14px 0}
+.q .tag{font-family:var(--td);font-size:12px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--painel2);border:1px solid var(--linha);color:var(--fraco);padding:3px 9px;border-radius:999px}
+.q .tag.som{background:#3a2a12;color:var(--ambar2);border-color:#6b5120}
+.q .tag.rom{background:#12323f;color:#8fd8f3;border-color:#1f5b70}
+.q .tag.dis{background:#2a1230;color:#e4a8f3;border-color:#5b2170}
+.q .cab{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.q .nq{font-family:var(--td);font-weight:700;color:var(--ouro)}
+.alts{list-style:none;margin:10px 0 0;padding:0}
+.alts li{margin:7px 0}
+.alts label{display:flex;gap:10px;align-items:flex-start;background:var(--fundo2);border:1px solid var(--linha);
+  border-radius:10px;padding:10px 12px;cursor:pointer}
+.alts label:hover{border-color:var(--verde)}
+.alts input{margin-top:5px}
+.alts label.certa{background:#0f3d2c;border-color:var(--verde)}
+.alts label.errada{background:#20303a;border-color:#3b4e59;opacity:.92}
+.alts label.marcada{outline:2px solid var(--ouro)}
+.coment{font-size:14.5px;color:var(--fraco);margin-top:6px;padding-left:4px}
+.travado .alts label{cursor:default}
+.placar{position:sticky;top:0;z-index:5;background:#08131bdd;backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--linha);padding:10px 0;margin-bottom:8px}
+.placar .wrap{padding-bottom:0;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.codigo{font-family:var(--td);font-size:26px;letter-spacing:3px;color:var(--ouro);font-weight:700}
+
+/* ---------- flip cards ---------- */
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+.flip{perspective:1100px;height:186px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;
+  border:1px solid var(--linha);padding:14px;display:flex;flex-direction:column;justify-content:center;overflow:auto}
+.flip .f{background:var(--painel2);font-family:var(--td);font-size:17px;text-align:center}
+.flip .b{background:var(--verdeEsc);transform:rotateY(180deg);font-size:15px}
+.flip.amb .b{background:var(--ambarEsc)}
+.flip .f small{display:block;margin-top:8px;color:var(--fraco);font-family:var(--tf);font-size:12.5px}
+
+/* ---------- modal ---------- */
+.modal-bg{position:fixed;inset:0;background:#000a; display:flex;align-items:center;justify-content:center;
+  z-index:99;padding:18px}
+.modal-cx{background:var(--painel);border:1px solid var(--linha);border-radius:16px;max-width:520px;width:100%;padding:20px}
+.modal-corpo{font-size:16px}
+.modal-pe{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+
+/* ---------- rodapé de navegação ---------- */
+.proximo{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  background:var(--fundo2);border:1px solid var(--linha);border-radius:14px;padding:14px 16px;margin:26px 0 0}
+.proximo a{font-family:var(--td);text-decoration:none;background:var(--ambar);color:#2a1806;
+  padding:10px 18px;border-radius:999px;font-weight:700}
+
+.oculto{display:none}
+@media(max-width:600px){
+  body{font-size:16px}
+  h1{font-size:24px}
+  .flip{height:210px}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .abas,.salvar,.placar,.proximo,.btn{display:none !important}
+  .card,.bloco,.q{border:1px solid #999;background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="topo"><div class="wrap"><span class="cracha">Kit de estudos</span><h1>🧭 Expedição Dois Biomas</h1><p class="subtopo">Geografia · 7º ano · Cap. 8 (Região Norte) e Cap. 9 (Região Nordeste) · prova 22/09</p><nav class="abas"><a href="leitura.html">📖 Leitura Guiada</a><a href="quiz.html">🎯 Quiz</a><a href="resumo.html">🗺️ Resumo</a><a href="simulado.html">📝 Simulado</a><a href="index.html" class="ativa">🏠 Início</a></nav></div></header>
+<div class="wrap">
+<div class="card verde">
+  <h2>🧭 Guia de estudo</h2>
+  <p>Kit completo de Geografia do 7º ano para a prova de <b>22/09</b>, feito a partir das páginas
+  do livro: <b>Cap. 8 — Região Norte</b> (p. 8 a 30) e <b>Cap. 9 — Região Nordeste</b>
+  (p. 46 a 55 e p. 61).</p>
+  <p>A ordem abaixo não é enfeite: você <b>lê</b>, <b>testa</b> o que entendeu enquanto está
+  fresco, usa o <b>Resumo</b> para fechar exatamente as lacunas que o Quiz mostrou e só então
+  encara o <b>Simulado</b> valendo.</p>
+</div>
+
+<div class="grade" style="grid-template-columns:repeat(auto-fit,minmax(215px,1fr))">
+  <a class="card verde" href="leitura.html" style="text-decoration:none;color:inherit">
+    <h3>📖 1. Leitura Guiada</h3>
+    <p class="pequeno">12 estações · 3 perguntas escritas em cada uma · pegadinhas e tabela de cobertura no fim.</p>
+  </a>
+  <a class="card verde" href="quiz.html" style="text-decoration:none;color:inherit">
+    <h3>🎯 2. Quiz</h3>
+    <p class="pequeno">15 questões objetivas · código <b>MED-XX-YY</b> · gabarito comentado.</p>
+  </a>
+  <a class="card amb" href="resumo.html" style="text-decoration:none;color:inherit">
+    <h3>🗺️ 3. Resumo</h3>
+    <p class="pequeno">14 partes · cartões que viram · post-its de prova · glossário.</p>
+  </a>
+  <a class="card amb" href="simulado.html" style="text-decoration:none;color:inherit">
+    <h3>📝 4. Simulado</h3>
+    <p class="pequeno">28 questões · somatório, romanos e discursiva · código <b>SIM-XX-YY</b>.</p>
+  </a>
+</div>
+
+<div class="card">
+  <h2>📅 Como usar (sugestão de 4 dias)</h2>
+  <table>
+    <tr><th>Dia</th><th>O que fazer</th></tr>
+    <tr><td>1</td><td>📖 Leitura Guiada — estações 1 a 6 (Setor Verde: território, clima, massas de ar, vegetação, matas e relevo/hidrografia).</td></tr>
+    <tr><td>2</td><td>📖 Leitura Guiada — estações 7 a 12 (povoamento, integração, demografia e todo o Setor Âmbar) + 🎯 Quiz.</td></tr>
+    <tr><td>3</td><td>🗺️ Resumo inteiro, com atenção redobrada nos temas que o Quiz mostrou fracos.</td></tr>
+    <tr><td>4</td><td>📝 Simulado, sem consultar. Depois, gabarito comentado e revisão do que errou.</td></tr>
+  </table>
+</div>
+
+<div class="postit">
+  <b>Dica para a mãe/o pai:</b> o Quiz e o Simulado geram um <b>código</b> ao serem enviados
+  (<b>MED-XX-YY</b> e <b>SIM-XX-YY</b>). O <b>XX é o número de acertos</b> — dá para conferir o
+  desempenho só de olhar. E o gabarito só abre depois que o código é digitado, então não tem como
+  espiar as respostas antes de responder.
+</div>
+
+<div class="card" id="rel">
+  <h2>📊 Relatório para os pais</h2>
+  <p class="pequeno">Digite <b>PAIS-77</b> (código fixo da família) ou o código gerado no Quiz ou no Simulado.</p>
+  <input type="text" id="cod-pais" placeholder="PAIS-77" maxlength="9">
+  <button class="btn btn-1" id="btn-rel">Ver relatório</button>
+  <div id="saida-rel" style="margin-top:14px"></div>
+</div>
+
+<div class="card">
+  <h2>📚 De onde saiu o conteúdo</h2>
+  <p class="pequeno">Todo o material foi escrito a partir das páginas do livro fotografadas:
+  <b>Bernoulli Sistema de Ensino — Geografia, 7º ano</b>, capítulo <b>“Região Norte do Brasil:
+  Amazônia viva”</b> (p. 8 a 30) e capítulo <b>“Um retrato do Nordeste do Brasil”</b>
+  (p. 46 a 55 e p. 61). Dados demográficos citados no livro: IBGE, Censo 2022 e 2023.</p>
+</div>
+</div>
+<script>
+/* ====== NÚCLEO COMUM — Expedição Dois Biomas (Geografia 7º ano) ====== */
+var MEM = {};
+var Store = {
+  get: function (k) {
+    try { var v = localStorage.getItem(k); return v === null ? (MEM[k] === undefined ? null : MEM[k]) : v; }
+    catch (e) { return MEM[k] === undefined ? null : MEM[k]; }
+  },
+  set: function (k, v) { MEM[k] = v; try { localStorage.setItem(k, v); } catch (e) { } },
+  del: function (k) { delete MEM[k]; try { localStorage.removeItem(k); } catch (e) { } },
+  getJSON: function (k, def) { var v = this.get(k); if (!v) return def; try { return JSON.parse(v); } catch (e) { return def; } },
+  setJSON: function (k, o) { this.set(k, JSON.stringify(o)); }
+};
+
+function esc(t){ var d=document.createElement('div'); d.textContent=(t===undefined||t===null)?'':t; return d.innerHTML; }
+
+/* Modal desenhado na página (nunca alert/confirm/prompt) */
+function modal(titulo, corpoHTML, botoes) {
+  var velho = document.getElementById('modal-bg');
+  if (velho) velho.remove();
+  var bg = document.createElement('div');
+  bg.id = 'modal-bg'; bg.className = 'modal-bg';
+  var cx = document.createElement('div');
+  cx.className = 'modal-cx';
+  cx.innerHTML = '<h3>' + titulo + '</h3><div class="modal-corpo">' + corpoHTML + '</div>';
+  var pe = document.createElement('div'); pe.className = 'modal-pe';
+  (botoes || [{ texto: 'Fechar' }]).forEach(function (b) {
+    var bt = document.createElement('button');
+    bt.className = 'btn ' + (b.classe || 'btn-2');
+    bt.textContent = b.texto;
+    bt.onclick = function () { bg.remove(); if (b.acao) b.acao(); };
+    pe.appendChild(bt);
+  });
+  cx.appendChild(pe); bg.appendChild(cx); document.body.appendChild(bg);
+  return bg;
+}
+
+/* ====== RELATÓRIO: dados extras de cada material (sem tempo) ====== */
+var Meta = {
+  key: '',
+  init: function (k) { this.key = k; },
+  set: function (obj) {
+    var d = Store.getJSON(this.key + '_meta', {});
+    for (var p in obj) { if (obj.hasOwnProperty(p)) d[p] = obj[p]; }
+    Store.setJSON(this.key + '_meta', d);
+  },
+  get: function () { return Store.getJSON(this.key + '_meta', {}); }
+};
+
+/* ====== ANTICÓPIA ====== */
+var Anticopia = (function () {
+  function norm(t) {
+    return (t || '').toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function pal(t) { var n = norm(t); return n ? n.split(' ') : []; }
+  function marcar(a, b, min) {
+    var marcas = new Array(a.length).fill(0), maior = 0;
+    var prev = new Array(b.length + 1).fill(0);
+    for (var i = 0; i < a.length; i++) {
+      var cur = new Array(b.length + 1).fill(0);
+      for (var j = 0; j < b.length; j++) {
+        if (a[i] === b[j]) {
+          cur[j + 1] = prev[j] + 1;
+          if (cur[j + 1] > maior) maior = cur[j + 1];
+          if (cur[j + 1] >= min) { for (var k = 0; k < cur[j + 1]; k++) marcas[i - k] = 1; }
+        }
+      }
+      prev = cur;
+    }
+    return { marcas: marcas, maior: maior };
+  }
+  return {
+    ehCopia: function (resposta, textoBloco, pergunta) {
+      var r = pal(resposta);
+      if (r.length < 6) return false;
+      var citacao = marcar(r, pal(pergunta || ''), 4).marcas;
+      var livres = [];
+      for (var i = 0; i < r.length; i++) { if (!citacao[i]) livres.push(r[i]); }
+      if (livres.length < 6) return false;
+      var t = pal(textoBloco);
+      var m8 = marcar(livres, t, 8);
+      if (m8.maior >= 8) return true;
+      var m5 = marcar(livres, t, 5);
+      var soma = m5.marcas.reduce(function (x, y) { return x + y; }, 0);
+      return (soma / livres.length) > 0.6;
+    },
+    _norm: norm
+  };
+})();
+
+/* ====== PAINEL DE SALVAMENTO ====== */
+function painelSalvar(KEY, coletar, restaurar, aoZerar) {
+  function carimbo() {
+    var q = Store.get(KEY + '_quando');
+    var el = document.getElementById('salvo-quando');
+    if (el) el.textContent = q ? 'último salvamento: ' + q : 'ainda não salvo';
+  }
+  window.salvarAgora = function () {
+    Store.setJSON(KEY, coletar());
+    Store.set(KEY + '_quando', new Date().toLocaleString('pt-BR'));
+    carimbo();
+  };
+  window.exportarTudo = function () {
+    var pacote = { chave: KEY, dados: Store.getJSON(KEY, {}), relatorio: Store.getJSON(KEY + '_meta', {}), quando: Store.get(KEY + '_quando') };
+    var cx = document.getElementById('caixa-export');
+    cx.style.display = 'block';
+    cx.querySelector('textarea').value = JSON.stringify(pacote, null, 2);
+    cx.querySelector('textarea').select();
+  };
+  window.importarTudo = function () { document.getElementById('caixa-import').style.display = 'block'; };
+  window.confirmarImport = function () {
+    var txt = document.getElementById('area-import').value;
+    try {
+      var p = JSON.parse(txt);
+      if (p.dados) Store.setJSON(KEY, p.dados);
+      if (p.relatorio) Store.setJSON(KEY + '_meta', p.relatorio);
+      if (p.quando) Store.set(KEY + '_quando', p.quando);
+      modal('✅ Importado', '<p>Os dados voltaram. A página vai recarregar.</p>', [{ texto: 'Ok', classe: 'btn-1', acao: function () { location.reload(); } }]);
+    } catch (e) {
+      modal('❌ Não deu', '<p>Esse texto não parece um arquivo de backup válido.</p>', [{ texto: 'Ok', classe: 'btn-1' }]);
+    }
+  };
+  window.zerarTudo = function () {
+    modal('🗑️ Zerar tudo?', '<p>Isso apaga todas as respostas deste material. Não dá para desfazer.</p>',
+      [{ texto: 'Cancelar', classe: 'btn-2' },
+      { texto: 'Sim, apagar', classe: 'btn-v', acao: function () {
+          Store.del(KEY); Store.del(KEY + '_quando'); Store.del(KEY + '_meta');
+          if (aoZerar) aoZerar(); location.reload();
+      } }]);
+  };
+  carimbo();
+  if (restaurar) restaurar(Store.getJSON(KEY, null));
+  setInterval(function () { window.salvarAgora(); }, 15000);
+}
+
+/* ====== CÓDIGO DE LIBERAÇÃO (XX = acertos, YY = 2 letras sem I e O) ====== */
+function gerarCodigo(prefixo, acertos) {
+  var L = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  var y = L[Math.floor(Math.random() * L.length)] + L[Math.floor(Math.random() * L.length)];
+  var xx = (acertos < 10 ? '0' : '') + acertos;
+  return prefixo + '-' + xx + '-' + y;
+}
+
+/* ====== EMBARALHAR COM SEMENTE FIXA (guarda a correta pelo CONTEÚDO) ====== */
+function baralhar(lista, semente) {
+  var a = lista.slice(), s = semente;
+  function rnd() { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(rnd() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+var MATS = [
+  {key:'geo7_leitura',  nome:'📖 Leitura Guiada', tipo:'leitura'},
+  {key:'geo7_quiz',     nome:'🎯 Quiz',           tipo:'quiz'},
+  {key:'geo7_resumo',   nome:'🗺️ Resumo',        tipo:'resumo'},
+  {key:'geo7_simulado', nome:'📝 Simulado',       tipo:'simulado'}
+];
+
+function linha(a,b){ return '<tr><td>'+a+'</td><td><b>'+b+'</b></td></tr>'; }
+
+function montarRelatorio(){
+  var h = '';
+  MATS.forEach(function(m){
+    var e = Store.getJSON(m.key+'_meta', null);
+    h += '<div class="card"><h3>'+m.nome+'</h3>';
+    if(!e){ h += '<p class="pequeno">Ainda não foi aberto neste computador.</p></div>'; return; }
+    h += '<table><tbody>';
+    if(m.tipo === 'leitura'){
+      h += linha('Estações concluídas', (e.blocosFeitos||0)+' de '+(e.totalBlocos||12));
+      h += linha('Respostas marcadas em vermelho (copiadas do texto)', (e.vermelhas||0));
+      h += linha('Pontos para revisar (checklist com "não" ou em branco)', (e.paraRevisar||0));
+    }
+    if(m.tipo === 'quiz'){
+      h += linha('Acertos', (e.acertos!==undefined ? e.acertos+' de '+(e.total||15) : 'ainda não enviado'));
+      h += linha('Código gerado', esc(e.codigo||'—'));
+    }
+    if(m.tipo === 'resumo'){
+      h += linha('Quanto do resumo foi percorrido', (e.rolagemMax||0)+'%');
+      h += linha('Partes marcadas como estudadas', (e.partesEstudadas||0)+' de '+(e.totalPartes||14));
+    }
+    if(m.tipo === 'simulado'){
+      h += linha('Acertos nas objetivas', (e.acertos!==undefined ? e.acertos+' de '+(e.totalObjetivas||27) : 'ainda não enviado'));
+      h += linha('Questões respondidas', (e.respondidas||0)+' de '+(e.total||28));
+      h += linha('Código gerado', esc(e.codigo||'—'));
+      if(e.discursiva) h += '<tr><td>Início da resposta discursiva</td><td class="pequeno">'+esc(e.discursiva)+'</td></tr>';
+    }
+    h += '</tbody></table></div>';
+  });
+  h += '<div class="postit">Como ler: <b>respostas em vermelho</b> na Leitura Guiada são respostas que ficaram '+
+       'muito parecidas com o texto do bloco — vale pedir para explicar de novo, de viva voz. '+
+       'E <b>% percorrido do Resumo</b> mostra se ele foi lido até o fim ou só no começo.</div>';
+  document.getElementById('saida-rel').innerHTML = h;
+}
+
+document.getElementById('btn-rel').onclick = function(){
+  var v = (document.getElementById('cod-pais').value||'').trim().toUpperCase();
+  var qCod = (Store.getJSON('geo7_quiz_meta', {})||{}).codigo || '';
+  var sCod = (Store.getJSON('geo7_simulado_meta', {})||{}).codigo || '';
+  if(v === 'PAIS-77' || (qCod && v === qCod) || (sCod && v === sCod)) montarRelatorio();
+  else document.getElementById('saida-rel').innerHTML =
+    '<div class="aviso-vermelho">Código incorreto. Use <b>PAIS-77</b> ou o código MED/SIM que apareceu no fim do Quiz ou do Simulado.</div>';
+};
+</script>
+</body>
+</html>
